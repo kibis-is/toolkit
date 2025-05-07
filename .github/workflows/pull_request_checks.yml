@@ -1,0 +1,56 @@
+name: "Pull Request Checks"
+
+on:
+  pull_request:
+
+jobs:
+  changed_files:
+    name: "Changed Files"
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read
+    outputs:
+      utilities: ${{ steps.filter.outputs.utilities }}
+    steps:
+      - name: "📥 Filter"
+        uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            utilities:
+              - 'packages/utilities/**'
+
+  validate_pr_title:
+    name: "Validate PR Title"
+    runs-on: ubuntu-latest
+    steps:
+      - name: "🛎 Checkout"
+        uses: actions/checkout@v4
+      - name: "🔧 Setup"
+        uses: ./.github/actions/use-pnpm-dependencies
+      - name: "📥 Get PR Title"
+        id: get_pr_title
+        uses: actions/github-script@v7
+        with:
+          result-encoding: string
+          script: |
+            const { data } = await github.rest.pulls.get({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.payload.pull_request.number
+            });
+            return data.title;
+      - name: "✅ Validate"
+        run: echo "${{ steps.get_pr_title.outputs.result }}" | pnpm commitlint
+
+  ##
+  # package specific
+  ##
+
+  lint_build_test_utilities:
+    name: "Lint, Build & Test - @kibisis/utilities"
+    needs: [changed_files, validate_pr_title]
+    if: ${{ needs.changed_files.outputs.utilities == 'true' }}
+    uses: ./.github/workflows/lint_build_test.yml
+    with:
+      package_name: "@kibisis/utilities"
