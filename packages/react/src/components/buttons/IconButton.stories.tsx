@@ -1,12 +1,19 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { IoSearchOutline } from 'react-icons/io5';
 
 // components
-import Button from './Button';
+import IconButton from './IconButton';
 
 // containers
 import { KibisisAppProvider } from '@/providers';
 
-const meta: Meta<typeof Button> = {
+// types
+import type { TIconButtonProps } from '@/types';
+
+const meta: Meta<typeof IconButton> = {
+  args: {
+    icon: IoSearchOutline,
+  },
   argTypes: {
     colorMode: {
       control: 'radio',
@@ -32,58 +39,28 @@ const meta: Meta<typeof Button> = {
       },
     },
   },
-  component: Button,
-  title: 'Components/Button',
+  component: IconButton,
+  title: 'Components/IconButton',
 };
 
-export const SolidWithDarkTheme: StoryObj<typeof meta> = {
+export const WithDarkTheme: StoryObj<TIconButtonProps> = {
   globals: {
     theme: 'dark',
   },
   render: (props) => (
     <KibisisAppProvider colorMode="dark">
-      <Button {...props}>
-        Button
-      </Button>
+      <IconButton {...props} />
     </KibisisAppProvider>
   ),
 };
 
-export const SolidWithLightTheme: StoryObj<typeof meta> = {
+export const WithLightTheme: StoryObj<TIconButtonProps> = {
   globals: {
     theme: 'light',
   },
   render: (props) => (
     <KibisisAppProvider colorMode="light">
-      <Button {...props}>
-        Button
-      </Button>
-    </KibisisAppProvider>
-  ),
-};
-
-export const OutlineWithDarkTheme: StoryObj<typeof meta> = {
-  globals: {
-    theme: 'dark',
-  },
-  render: (props) => (
-    <KibisisAppProvider colorMode="dark">
-      <Button variant="outline" {...props}>
-        Button
-      </Button>
-    </KibisisAppProvider>
-  ),
-};
-
-export const OutlineWithLightTheme: StoryObj<typeof meta> = {
-  globals: {
-    theme: 'light',
-  },
-  render: (props) => (
-    <KibisisAppProvider colorMode="light">
-      <Button variant="outline" {...props}>
-        Button
-      </Button>
+      <IconButton {...props} />
     </KibisisAppProvider>
   ),
 };

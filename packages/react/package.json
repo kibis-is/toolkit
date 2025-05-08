@@ -18,7 +18,7 @@
     "build": "pnpm run clean && vite build",
     "build:dependencies": "./scripts/prebuild.sh",
     "build:storybook": "storybook build",
-    "dev:storybook": "storybook dev -p 6006 --no-open --no-manager-cache",
+    "dev:storybook": "storybook dev -p 6006 --no-open",
     "generate:index": "tsx ./scripts/generate-index.ts",
     "lint": "eslint .",
     "prettier": "prettier --write \"**/*.{js,json,ts}\"",
