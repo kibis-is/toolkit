@@ -36,6 +36,9 @@ const meta: Meta<typeof Button> = {
     },
   },
   component: Button,
+  globals: {
+    theme: 'dark',
+  },
   title: 'Components/Button',
 };
 

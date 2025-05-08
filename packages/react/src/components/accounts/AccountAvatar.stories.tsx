@@ -11,6 +11,9 @@ import type { TAccountAvatarProps } from '@/types';
 
 const meta: Meta<typeof AccountAvatar> = {
   component: AccountAvatar,
+  globals: {
+    theme: 'dark',
+  },
   title: 'Components/AccountAvatar',
 };
 

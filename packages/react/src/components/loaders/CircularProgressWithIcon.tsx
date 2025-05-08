@@ -12,7 +12,7 @@ import { useColorModeValue, usePrimaryColor, useSubTextColor } from '@/hooks';
 import type { ICircularProgressWithIconProps } from '@/types';
 
 // utils
-import { iconSize } from '@/utilities';
+import { iconSize } from '@/utilities/icons';
 
 const CircularProgressWithIcon: FC<ICircularProgressWithIconProps> = ({
   colorMode,

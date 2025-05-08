@@ -14,10 +14,10 @@ const meta: Meta<typeof CircularProgressWithIcon> = {
   args: {
     icon: IoLockClosedOutline,
   },
-  argTypes: {
-
-  },
   component: CircularProgressWithIcon,
+  globals: {
+    theme: 'dark',
+  },
   title: 'Components/CircularProgressWithIcon',
 };
 

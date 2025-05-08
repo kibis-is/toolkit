@@ -40,6 +40,9 @@ const meta: Meta<typeof IconButton> = {
     },
   },
   component: IconButton,
+  globals: {
+    theme: 'dark',
+  },
   title: 'Components/IconButton',
 };
 

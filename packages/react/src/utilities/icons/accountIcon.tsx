@@ -115,7 +115,7 @@ import {
 import type { IAccountIconParams } from '@/types';
 
 // utils
-import { iconSize } from '@/utilities';
+import { iconSize } from '@/utilities/icons/index';
 
 /**
  * Parses the account icon to an JSX Icon. If the account icon is null, it defaults to the wallet icon.

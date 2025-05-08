@@ -1,2 +1,2 @@
-export { default as accountIcon } from './accountIcon';
-export { default as iconSize } from './iconSize';
+export * from './icons';
+export * from './strings';

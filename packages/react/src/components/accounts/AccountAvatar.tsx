@@ -8,7 +8,7 @@ import { usePrimaryButtonTextColor, usePrimaryColor } from '@/hooks';
 import type { TAccountAvatarProps } from '@/types';
 
 // utils
-import { accountIcon } from '@/utilities';
+import { accountIcon } from '@/utilities/icons';
 
 const AccountAvatar: FC<TAccountAvatarProps> = ({
   color,
@@ -61,23 +61,6 @@ const AccountAvatar: FC<TAccountAvatarProps> = ({
       })}
     </Avatar.Root>
   );
-
-  // return (
-  //   <Avatar
-  //     bg={
-  //       !color || color === 'primary'
-  //         ? primaryColor
-  //         : color
-  //     }
-  //     icon={accountIcon({
-  //       icon: icon || null,
-  //       color: iconColor,
-  //     })}
-  //     size={size}
-  //   >
-  //     {children}
-  //   </Avatar>
-  // );
 };
 
 AccountAvatar.displayName = 'AccountAvatar';
