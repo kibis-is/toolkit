@@ -5,14 +5,60 @@ export default createSystem(
   defineConfig({
     globalCss: {
       html: {
-        colorPalette: {
-          _dark: 'primaryDark',
-          _light: 'primaryLight',
-        },
         lineHeight: '1.5',
       },
     },
     theme: {
+      semanticTokens: {
+        colors: {
+          primaryDark: {
+            contrast: {
+              value: '{colors.gray.800}', // text on solid bg
+            },
+            emphasized: {
+              value: '{colors.primaryDark.700}', // hover/active
+            },
+            fg: {
+              value: '{colors.primaryDark.500}', // text color
+            },
+            focusRing: {
+              value: '{colors.primaryDark.500}', // focus ring
+            },
+            muted: {
+              value: '{colors.primaryDark.500}', // muted bg
+            },
+            solid: {
+              value: '{colors.primaryDark.500}', // main button bg
+            },
+            subtle: {
+              value: '{colors.primaryDark.200}', // subtle bg
+            },
+          },
+          primaryLight: {
+            contrast: {
+              value: 'white',
+            },
+            emphasized: {
+              value: '{colors.primaryLight.700}',
+            },
+            fg: {
+              value: '{colors.primaryLight.100}',
+            },
+            focusRing: {
+              value: '{colors.primaryLight.500}',
+            },
+            muted: {
+              value: '{colors.primaryLight.100}',
+            },
+            solid: {
+              value: '{colors.primaryLight.500}',
+            },
+            subtle: {
+              value: '{colors.primaryLight.200}',
+            },
+          },
+        },
+      },
       tokens: {
         colors: {
           algorand: {

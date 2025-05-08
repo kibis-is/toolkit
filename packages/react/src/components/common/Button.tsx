@@ -8,7 +8,7 @@ import React, {
 import { Button as ChakraButton } from '@chakra-ui/react';
 
 // hooks
-import { usePrimaryButtonTextColor, usePrimaryColorScheme } from '@/hooks';
+import { usePrimaryButtonTextColor, usePrimaryColorPalette } from '@/hooks';
 
 // types
 import type { TButtonProps } from '@/types';
@@ -19,18 +19,21 @@ const Button: ForwardRefExoticComponent<
   ({ colorMode, ...otherProps }, ref) => {
     // hooks
     const primaryButtonTextColor = usePrimaryButtonTextColor(colorMode);
-    const primaryColorScheme = usePrimaryColorScheme(colorMode);
+    const primaryColorPalette = usePrimaryColorPalette(colorMode);
 
     return (
       <ChakraButton
+        _hover={{
+          color: otherProps.variant == 'outline' ? primaryButtonTextColor : otherProps.color,
+        }}
         color={
           otherProps.variant !== 'outline'
             ? primaryButtonTextColor
             : otherProps.color
         }
-        colorScheme={primaryColorScheme}
-        {...otherProps}
+        colorPalette={primaryColorPalette}
         borderRadius="3xl"
+        {...otherProps}
         ref={ref as LegacyRef<HTMLButtonElement>}
       />
     );

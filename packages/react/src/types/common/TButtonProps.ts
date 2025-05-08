@@ -3,6 +3,10 @@ import type { ButtonProps } from '@chakra-ui/react';
 // types
 import type { IBaseComponentProps } from '@/types';
 
-type TButtonProps = IBaseComponentProps & ButtonProps;
+interface IProps {
+  variant?: 'solid' | 'outline';
+}
+
+type TButtonProps = IBaseComponentProps & Omit<ButtonProps, 'variant'> & IProps;
 
 export default TButtonProps;

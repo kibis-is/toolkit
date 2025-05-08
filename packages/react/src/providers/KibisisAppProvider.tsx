@@ -13,7 +13,7 @@ import defaultTheme from '@/theme';
 // types
 import type { IKibisisAppProviderProps } from '@/types';
 
-const KibisisAppProvider: FC<PropsWithChildren<IKibisisAppProviderProps>> = ({ children, colorMode = 'light', debug = false, i18n, logger }) => {
+const KibisisAppProvider: FC<PropsWithChildren<IKibisisAppProviderProps>> = ({ children, colorMode = 'dark', debug = false, i18n, logger }) => {
   // states
   const [_colorMode, setColorMode] = useState<ColorMode>(colorMode);
   const [_logger, setLogger] = useState<ILogger>(logger ?? createLogger(debug ? 'debug' : 'error'));
