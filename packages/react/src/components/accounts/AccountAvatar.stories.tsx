@@ -55,4 +55,18 @@ export const WithColor: StoryObj<TAccountAvatarProps> = {
   ),
 };
 
+export const WithBadges: StoryObj<TAccountAvatarProps> = {
+  render: (props) => (
+    <KibisisAppProvider>
+      <AccountAvatar
+        badges={{
+          rekeyed: true,
+          watch: true,
+        }}
+        {...props}
+      />
+    </KibisisAppProvider>
+  ),
+};
+
 export default meta;
