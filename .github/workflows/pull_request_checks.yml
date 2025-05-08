@@ -10,6 +10,7 @@ jobs:
     permissions:
       pull-requests: read
     outputs:
+      react: ${{ steps.filter.outputs.react }}
       utilities: ${{ steps.filter.outputs.utilities }}
     steps:
       - name: "📥 Filter"
@@ -17,6 +18,8 @@ jobs:
         id: filter
         with:
           filters: |
+            react:
+              - 'packages/react/**'
             utilities:
               - 'packages/utilities/**'
 
@@ -46,6 +49,14 @@ jobs:
   ##
   # package specific
   ##
+
+  lint_build_test_react:
+    name: "Lint, Build & Test - @kibisis/react"
+    needs: [changed_files, validate_pr_title]
+    if: ${{ needs.changed_files.outputs.react == 'true' }}
+    uses: ./.github/workflows/lint_build_test.yml
+    with:
+      package_name: "@kibisis/react"
 
   lint_build_test_utilities:
     name: "Lint, Build & Test - @kibisis/utilities"
