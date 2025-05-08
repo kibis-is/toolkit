@@ -1,4 +1,5 @@
 import { Icon, type IconProps } from '@chakra-ui/react';
+import { KbAlgorand, KbVoi } from '@kibisis/icons';
 import React, { type ReactElement } from 'react';
 import {
   IoAirplaneOutline,
@@ -107,10 +108,6 @@ import {
   FaYenSign,
 } from 'react-icons/fa';
 
-// components
-// import AlgorandIcon from '@common/components/AlgorandIcon';
-// import VoiIcon from '@common/components/VoiIcon';
-
 // types
 import type { IAccountIconParams } from '@/types';
 
@@ -144,6 +141,9 @@ export default function accountIcon({
   switch (icon) {
     case 'airplane':
       _icon = IoAirplaneOutline;
+      break;
+    case 'algorand':
+      _icon = KbAlgorand;
       break;
     case 'american-football':
       _icon = IoAmericanFootballOutline;
@@ -432,6 +432,9 @@ export default function accountIcon({
       break;
     case 'usd':
       _icon = FaDollarSign;
+      break;
+    case 'voi':
+      _icon = KbVoi;
       break;
     case 'water':
       _icon = IoWaterOutline;

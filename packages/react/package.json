@@ -15,7 +15,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "pnpm run clean && vite build",
+    "build": "vite build",
     "build:dependencies": "./scripts/prebuild.sh",
     "build:storybook": "storybook build",
     "dev:storybook": "storybook dev -p 6006 --no-open",
@@ -25,11 +25,12 @@
     "test": "vitest run --config vitest.config.ts"
   },
   "dependencies": {
+    "@kibisis/icons": "workspace:^",
     "@kibisis/utilities": "workspace:^",
     "@stablelib/random": "^2.0.1",
     "i18next": "^24.2.1",
     "react-i18next": "^15.4.0",
-    "react-icons": "^5.4.0"
+    "react-icons": "catalog:"
   },
   "devDependencies": {
     "@chakra-ui/color-mode": "^2.2.0",

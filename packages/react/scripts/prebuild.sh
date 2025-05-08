@@ -9,6 +9,7 @@
 # Returns exit code 0.
 function main {
   # build workspace dependencies
+  pnpm -F @kibisis/icons run build
   pnpm -F @kibisis/utilities run build
 
   exit 0

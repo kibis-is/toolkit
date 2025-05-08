@@ -50,7 +50,7 @@ export const WithIcon: StoryObj<TAccountAvatarProps> = {
 export const WithColor: StoryObj<TAccountAvatarProps> = {
   render: (props) => (
     <KibisisAppProvider>
-      <AccountAvatar color="green.500" icon="airplane" {...props} />
+      <AccountAvatar color="green.500" icon="voi" {...props} />
     </KibisisAppProvider>
   ),
 };

@@ -150,6 +150,9 @@ importers:
 
   packages/react:
     dependencies:
+      '@kibisis/icons':
+        specifier: workspace:^
+        version: link:../icons
       '@kibisis/utilities':
         specifier: workspace:^
         version: link:../utilities
