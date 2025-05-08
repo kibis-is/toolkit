@@ -27,6 +27,9 @@ catalogs:
     prettier:
       specifier: ^3.4.2
       version: 3.5.3
+    react-icons:
+      specifier: ^5.4.0
+      version: 5.5.0
     shx:
       specifier: ^0.3.4
       version: 0.3.4
@@ -96,11 +99,57 @@ importers:
         specifier: ^8.0.2
         version: 8.0.2(semantic-release@24.2.3(typescript@5.8.3))
 
+  packages/icons:
+    dependencies:
+      react-icons:
+        specifier: 'catalog:'
+        version: 5.5.0(react@19.1.0)
+    devDependencies:
+      '@eslint/js':
+        specifier: 'catalog:'
+        version: 9.26.0
+      '@types/node':
+        specifier: 'catalog:'
+        version: 20.17.44
+      chalk:
+        specifier: 'catalog:'
+        version: 5.4.1
+      eslint:
+        specifier: 'catalog:'
+        version: 9.26.0(jiti@2.4.2)
+      eslint-config-prettier:
+        specifier: 'catalog:'
+        version: 9.1.0(eslint@9.26.0(jiti@2.4.2))
+      globals:
+        specifier: 'catalog:'
+        version: 15.15.0
+      prettier:
+        specifier: 'catalog:'
+        version: 3.5.3
+      shx:
+        specifier: 'catalog:'
+        version: 0.3.4
+      tsx:
+        specifier: 'catalog:'
+        version: 4.19.2
+      typescript:
+        specifier: 'catalog:'
+        version: 5.8.3
+      typescript-eslint:
+        specifier: 'catalog:'
+        version: 8.32.0(eslint@9.26.0(jiti@2.4.2))(typescript@5.8.3)
+      vite:
+        specifier: 'catalog:'
+        version: 6.3.5(@types/node@20.17.44)(jiti@2.4.2)(tsx@4.19.2)(yaml@2.7.1)
+      vite-plugin-dts:
+        specifier: 'catalog:'
+        version: 4.5.3(@types/node@20.17.44)(rollup@4.40.2)(typescript@5.8.3)(vite@6.3.5(@types/node@20.17.44)(jiti@2.4.2)(tsx@4.19.2)(yaml@2.7.1))
+      vite-tsconfig-paths:
+        specifier: 'catalog:'
+        version: 5.1.4(typescript@5.8.3)(vite@6.3.5(@types/node@20.17.44)(jiti@2.4.2)(tsx@4.19.2)(yaml@2.7.1))
+
   packages/react:
     dependencies:
-      '@ark-ui/react':
-        specifier: ^5.9.0
-        version: 5.9.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@kibisis/utilities':
         specifier: workspace:^
         version: link:../utilities
@@ -110,14 +159,11 @@ importers:
       i18next:
         specifier: ^24.2.1
         version: 24.2.3(typescript@5.8.3)
-      progress:
-        specifier: link:@ark-ui/react/progress
-        version: link:@ark-ui/react/progress
       react-i18next:
         specifier: ^15.4.0
         version: 15.5.1(i18next@24.2.3(typescript@5.8.3))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(typescript@5.8.3)
       react-icons:
-        specifier: ^5.4.0
+        specifier: 'catalog:'
         version: 5.5.0(react@19.1.0)
     devDependencies:
       '@chakra-ui/color-mode':
@@ -288,12 +334,6 @@ packages:
 
   '@ark-ui/react@5.8.0':
     resolution: {integrity: sha512-5KrB7YqJ1YXz5DNmu5LWoWp1JeqC/SPdXMRekvOopDdKqWARsfdSV+mZuTHq2UY5bCSv8GYZJEBhbQyk265Yxw==}
-    peerDependencies:
-      react: '>=18.0.0'
-      react-dom: '>=18.0.0'
-
-  '@ark-ui/react@5.9.0':
-    resolution: {integrity: sha512-aWOv6aCbcPkUUBIqPGDh3mp0qghYRvcR10HToxIFD583UIi16E36fwsZOIIh/yZW3ka/pAWlgBxpyFC9GzdarQ==}
     peerDependencies:
       react: '>=18.0.0'
       react-dom: '>=18.0.0'
@@ -4710,68 +4750,6 @@ snapshots:
       tinyexec: 1.0.1
 
   '@ark-ui/react@5.8.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
-    dependencies:
-      '@internationalized/date': 3.8.0
-      '@zag-js/accordion': 1.12.0
-      '@zag-js/anatomy': 1.12.0
-      '@zag-js/angle-slider': 1.12.0
-      '@zag-js/auto-resize': 1.12.0
-      '@zag-js/avatar': 1.12.0
-      '@zag-js/carousel': 1.12.0
-      '@zag-js/checkbox': 1.12.0
-      '@zag-js/clipboard': 1.12.0
-      '@zag-js/collapsible': 1.12.0
-      '@zag-js/collection': 1.12.0
-      '@zag-js/color-picker': 1.12.0
-      '@zag-js/color-utils': 1.12.0
-      '@zag-js/combobox': 1.12.0
-      '@zag-js/core': 1.12.0
-      '@zag-js/date-picker': 1.12.0(@internationalized/date@3.8.0)
-      '@zag-js/date-utils': 1.12.0(@internationalized/date@3.8.0)
-      '@zag-js/dialog': 1.12.0
-      '@zag-js/dom-query': 1.12.0
-      '@zag-js/editable': 1.12.0
-      '@zag-js/file-upload': 1.12.0
-      '@zag-js/file-utils': 1.12.0
-      '@zag-js/floating-panel': 1.12.0
-      '@zag-js/focus-trap': 1.12.0
-      '@zag-js/highlight-word': 1.12.0
-      '@zag-js/hover-card': 1.12.0
-      '@zag-js/i18n-utils': 1.12.0
-      '@zag-js/listbox': 1.12.0
-      '@zag-js/menu': 1.12.0
-      '@zag-js/number-input': 1.12.0
-      '@zag-js/pagination': 1.12.0
-      '@zag-js/pin-input': 1.12.0
-      '@zag-js/popover': 1.12.0
-      '@zag-js/presence': 1.12.0
-      '@zag-js/progress': 1.12.0
-      '@zag-js/qr-code': 1.12.0
-      '@zag-js/radio-group': 1.12.0
-      '@zag-js/rating-group': 1.12.0
-      '@zag-js/react': 1.12.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
-      '@zag-js/select': 1.12.0
-      '@zag-js/signature-pad': 1.12.0
-      '@zag-js/slider': 1.12.0
-      '@zag-js/splitter': 1.12.0
-      '@zag-js/steps': 1.12.0
-      '@zag-js/switch': 1.12.0
-      '@zag-js/tabs': 1.12.0
-      '@zag-js/tags-input': 1.12.0
-      '@zag-js/time-picker': 1.12.0(@internationalized/date@3.8.0)
-      '@zag-js/timer': 1.12.0
-      '@zag-js/toast': 1.12.0
-      '@zag-js/toggle': 1.12.0
-      '@zag-js/toggle-group': 1.12.0
-      '@zag-js/tooltip': 1.12.0
-      '@zag-js/tour': 1.12.0
-      '@zag-js/tree-view': 1.12.0
-      '@zag-js/types': 1.12.0
-      '@zag-js/utils': 1.12.0
-      react: 19.1.0
-      react-dom: 19.1.0(react@19.1.0)
-
-  '@ark-ui/react@5.9.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
     dependencies:
       '@internationalized/date': 3.8.0
       '@zag-js/accordion': 1.12.0
