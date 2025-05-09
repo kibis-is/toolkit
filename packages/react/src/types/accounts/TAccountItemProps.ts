@@ -1,12 +1,8 @@
 // types
-import type { IBaseComponentProps, TAccountColors, TAccountIcons } from '@/types';
+import type { IAccount, IBaseComponentProps } from '@/types';
 
 interface IProps {
-  address: string;
-  color?: TAccountColors;
-  domainName?: string;
-  icon?: TAccountIcons;
-  name?: string;
+  account: IAccount;
   subTextColor?: string;
   textColor?: string;
 }

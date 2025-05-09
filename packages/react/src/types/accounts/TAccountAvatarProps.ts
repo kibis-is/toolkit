@@ -1,10 +1,9 @@
 // types
-import type { IAccountAvatarBadgesProps, IBaseComponentProps, TAccountColors, TAccountIcons, TSizes } from '@/types';
+import type { IAccount, IAccountAvatarBadgesProps, IBaseComponentProps, TSizes } from '@/types';
 
 interface IProps {
+  account: IAccount;
   badges?: IAccountAvatarBadgesProps;
-  color?: TAccountColors;
-  icon?: TAccountIcons;
   size?: TSizes;
 }
 type TAccountAvatarProps = IProps & IBaseComponentProps;

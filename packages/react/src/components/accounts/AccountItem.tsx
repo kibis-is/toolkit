@@ -16,41 +16,41 @@ import type { TAccountItemProps } from '@/types';
 // utils
 import { ellipseText } from '@/utilities';
 
-const AccountItem: FC<TAccountItemProps> = ({ address, color, colorMode, domainName, icon, name, subTextColor, textColor }) => {
+const AccountItem: FC<TAccountItemProps> = ({ account, colorMode, subTextColor, textColor }) => {
   // hooks
   const defaultSubTextColor = useSubTextColor(colorMode);
   const defaultTextColor = useDefaultTextColor(colorMode);
   // memos
   const _address = useMemo(
     () =>
-      ellipseText(address, {
+      ellipseText(account.address, {
         end: 10,
         start: 10,
       }),
-    [address]
+    [account.address]
   );
   // renders
   const renderNameAddress = useCallback(() => {
-    if (name) {
+    if (account.name) {
       return (
         <VStack align="flex-start" flexGrow={1} gap={0} justify="space-evenly">
           <Text color={defaultTextColor} fontSize="sm" maxW={195} textAlign="left" truncate={true}>
-            {name}
+            {account.name}
           </Text>
 
           <Text color={subTextColor || defaultSubTextColor} fontSize="xs" textAlign="left">
-            {domainName ?? _address}
+            {account.domainName.primary ?? _address}
           </Text>
         </VStack>
       );
     }
 
     // if there is no name, but there is a domain name, display the domain name
-    if (domainName) {
+    if (account.domainName) {
       return (
         <VStack align="flex-start" flexGrow={1} gap={0} justify="space-evenly">
           <Text color={textColor || defaultTextColor} fontSize="sm" maxW={195} textAlign="left" truncate={true}>
-            {domainName}
+            {account.domainName.primary}
           </Text>
 
           <Text color={subTextColor || defaultSubTextColor} fontSize="xs" textAlign="left">
@@ -65,13 +65,13 @@ const AccountItem: FC<TAccountItemProps> = ({ address, color, colorMode, domainN
         {_address}
       </Text>
     );
-  }, [_address, defaultSubTextColor, defaultTextColor, domainName, name, subTextColor, textColor]);
+  }, [_address, defaultSubTextColor, defaultTextColor, account.domainName.primary, account.name, subTextColor, textColor]);
 
   return (
     <HStack gap={DEFAULT_GAP / 3} m={0} minW={300} p={0} w="full">
       {/*avatar*/}
       <Center>
-        <AccountAvatar color={color} colorMode={colorMode} icon={icon} />
+        <AccountAvatar account={account} colorMode={colorMode} />
       </Center>
 
       {renderNameAddress()}

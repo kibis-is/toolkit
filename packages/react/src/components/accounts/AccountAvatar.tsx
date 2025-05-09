@@ -9,14 +9,12 @@ import { usePrimaryButtonTextColor, usePrimaryColor } from '@/hooks';
 import type { TAccountAvatarProps } from '@/types';
 
 // utils
-import { accountIcon } from '@/utilities/icons';
-import { iconSize } from '@/utilities';
+import { accountIcon, iconSize } from '@/utilities';
 
 const AccountAvatar: FC<TAccountAvatarProps> = ({
+  account,
   badges,
-  color,
   colorMode,
-  icon,
   size = 'md',
 }) => {
   // hooks
@@ -27,7 +25,7 @@ const AccountAvatar: FC<TAccountAvatarProps> = ({
   // misc
   let iconColor = primaryButtonTextColor;
 
-  switch (color) {
+  switch (account.color) {
     case 'yellow.300':
     case 'yellow.500':
     case 'orange.300':
@@ -53,21 +51,23 @@ const AccountAvatar: FC<TAccountAvatarProps> = ({
   return (
     <Avatar.Root
       css={{
-        bg: !color || color === 'primary'
+        bg: !account.color || account.color === 'primary'
           ? primaryColor
-          : color
+          : account.color
       }}
       size={size}
     >
       {/*icon*/}
       {accountIcon({
-        icon,
         color: iconColor,
         size,
+        ...(account.icon && {
+          icon: account.icon,
+        })
       })}
 
       {/*rekeyed badge*/}
-      {badges?.watch && (
+      {badges?.rekeyed && (
         <Float placement="bottom-end" offsetX="1" offsetY="1">
           <Circle
             bg="green.500"

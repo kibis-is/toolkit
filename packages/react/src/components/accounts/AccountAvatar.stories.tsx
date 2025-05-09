@@ -10,6 +10,18 @@ import { KibisisAppProvider } from '@/providers';
 import type { TAccountAvatarProps } from '@/types';
 
 const meta: Meta<typeof AccountAvatar> = {
+  args: {
+    account: {
+      address: 'XKGAAAH6CEEJLYYR5FYT6YAKH4CGEG4CCWMWACVX7666ACVZRSUNQD5KFQ',
+      color: null,
+      domainName: {
+        names: [],
+        primary: null,
+      },
+      icon: null,
+      name: null,
+    },
+  },
   component: AccountAvatar,
   globals: {
     theme: 'dark',
@@ -40,17 +52,30 @@ export const WithLightTheme: StoryObj<TAccountAvatarProps> = {
 };
 
 export const WithIcon: StoryObj<TAccountAvatarProps> = {
-  render: (props) => (
+  render: ({ account, ...otherProps }) => (
     <KibisisAppProvider>
-      <AccountAvatar icon="beer" {...props} />
+      <AccountAvatar
+          account={{
+          ...account,
+          icon: 'beer',
+        }}
+        {...otherProps}
+      />
     </KibisisAppProvider>
   ),
 };
 
 export const WithColor: StoryObj<TAccountAvatarProps> = {
-  render: (props) => (
+  render: ({ account, ...otherProps }) => (
     <KibisisAppProvider>
-      <AccountAvatar color="green.500" icon="voi" {...props} />
+      <AccountAvatar
+        account={{
+          ...account,
+          color: 'green.500',
+          icon: 'voi',
+        }}
+        {...otherProps}
+      />
     </KibisisAppProvider>
   ),
 };

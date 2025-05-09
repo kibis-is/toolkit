@@ -83,6 +83,7 @@ pnpm install
 
 | Name                                                                                               | Visibility | Description                                   | Package                                                                                                                   |
 |----------------------------------------------------------------------------------------------------|------------|-----------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|
+| [`@kibisis/icons`](https://github.com/kibis-is/toolkit/blob/main/packages/icons/README.md)         | `public`   | Icons used in Kibisis apps.                   | [![NPM Version](https://img.shields.io/npm/v/%40kibisis%2Ficons)](https://www.npmjs.com/package/%40kibisis/icons)         |
 | [`@kibisis/react`](https://github.com/kibis-is/toolkit/blob/main/packages/react/README.md)         | `public`   | React UI components used in the Kibisis apps. | [![NPM Version](https://img.shields.io/npm/v/%40kibisis%2Freact)](https://www.npmjs.com/package/%40kibisis/react)         |
 | [`@kibisis/utilities`](https://github.com/kibis-is/toolkit/blob/main/packages/utilities/README.md) | `public`   | TypeScript utilities for Kibisis apps/tools.  | [![NPM Version](https://img.shields.io/npm/v/%40kibisis%2Futilities)](https://www.npmjs.com/package/%40kibisis/utilities) |
 

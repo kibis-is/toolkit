@@ -11,7 +11,16 @@ import type { TAccountItemProps } from '@/types';
 
 const meta: Meta<typeof AccountItem> = {
   args: {
-    address: 'XKGAAAH6CEEJLYYR5FYT6YAKH4CGEG4CCWMWACVX7666ACVZRSUNQD5KFQ',
+    account: {
+      address: 'XKGAAAH6CEEJLYYR5FYT6YAKH4CGEG4CCWMWACVX7666ACVZRSUNQD5KFQ',
+      color: null,
+      domainName: {
+        names: [],
+        primary: null,
+      },
+      icon: null,
+      name: null,
+    },
   },
   component: AccountItem,
   globals: {
@@ -43,33 +52,65 @@ export const WithLightTheme: StoryObj<TAccountItemProps> = {
 };
 
 export const WithName: StoryObj<TAccountItemProps> = {
-  render: (props) => (
+  render: ({ account, ...otherProps }) => (
     <KibisisAppProvider>
-      <AccountItem name="Main" {...props} />
+      <AccountItem
+        account={{
+          ...account,
+          name: 'Main',
+        }}
+       {...otherProps}
+      />
     </KibisisAppProvider>
   ),
 };
 
 export const WithDomain: StoryObj<TAccountItemProps> = {
-  render: (props) => (
+  render: ({ account, ...otherProps }) => (
     <KibisisAppProvider>
-      <AccountItem domainName="magnetartare.voi" {...props} />
+      <AccountItem
+        account={{
+          ...account,
+          domainName: {
+            names: ['magnetartare.voi'],
+            primary: 'magnetartare.voi',
+          },
+        }}
+        {...otherProps}
+      />
     </KibisisAppProvider>
   ),
 };
 
 export const WithNameAndDomain: StoryObj<TAccountItemProps> = {
-  render: (props) => (
+  render: ({ account, ...otherProps }) => (
     <KibisisAppProvider>
-      <AccountItem domainName="magnetartare.voi" name="Main" {...props} />
+      <AccountItem
+        account={{
+          ...account,
+          domainName: {
+            names: ['magnetartare.voi'],
+            primary: 'magnetartare.voi',
+          },
+          name: 'Main',
+        }}
+        {...otherProps}
+      />
     </KibisisAppProvider>
   ),
 };
 
 export const WithColorAndIcon: StoryObj<TAccountItemProps> = {
-  render: (props) => (
+  render: ({ account, ...otherProps }) => (
     <KibisisAppProvider>
-      <AccountItem color="teal.500" icon="home" {...props} />
+      <AccountItem
+        account={{
+          ...account,
+          color: 'teal.500',
+          icon: 'home',
+        }}
+        {...otherProps}
+      />
     </KibisisAppProvider>
   ),
 };
