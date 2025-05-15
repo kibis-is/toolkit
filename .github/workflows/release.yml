@@ -17,8 +17,18 @@ permissions:
   pull-requests: write # to be able to comment on released pull requests
 
 jobs:
-  release_utils:
+  release_chains:
+    name: "Release - @kibisis/chains"
+    uses: ./.github/workflows/publish_release.yml
+    with:
+      package_dir: "chains"
+      package_name: "@kibisis/chains"
+    secrets:
+      NPM_TOKEN: ${{ secrets.NPM_PUBLISH_PACKAGES_ACCESS_TOKEN }}
+
+  release_utilities:
     name: "Release - @kibisis/utilities"
+    needs: [release_chains]
     uses: ./.github/workflows/publish_release.yml
     with:
       package_dir: "utilities"
