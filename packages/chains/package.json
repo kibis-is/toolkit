@@ -36,5 +36,8 @@
     "vite": "catalog:",
     "vite-plugin-dts": "catalog:",
     "vite-tsconfig-paths": "catalog:"
+  },
+  "dependencies": {
+    "@stablelib/base64": "^2.0.1"
   }
 }

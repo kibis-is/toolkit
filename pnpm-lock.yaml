@@ -97,6 +97,10 @@ importers:
         version: 8.0.2(semantic-release@24.2.3(typescript@5.8.3))
 
   packages/chains:
+    dependencies:
+      '@stablelib/base64':
+        specifier: ^2.0.1
+        version: 2.0.1
     devDependencies:
       '@eslint/js':
         specifier: 'catalog:'
@@ -1105,6 +1109,9 @@ packages:
   '@sindresorhus/merge-streams@4.0.0':
     resolution: {integrity: sha512-tlqY9xq5ukxTUZBmoOp+m61cqwQD5pHJtFY3Mn8CA8ps6yghLH/Hw8UPdqg4OLmFW3IFlcXnQNmo/dh8HzXYIQ==}
     engines: {node: '>=18'}
+
+  '@stablelib/base64@2.0.1':
+    resolution: {integrity: sha512-P2z89A7N1ETt6RxgpVdDT2xlg8cnm3n6td0lY9gyK7EiWK3wdq388yFX/hLknkCC0we05OZAD1rfxlQJUbl5VQ==}
 
   '@stablelib/binary@2.0.1':
     resolution: {integrity: sha512-U9iAO8lXgEDONsA0zPPSgcf3HUBNAqHiJmSHgZz62OvC3Hi2Bhc5kTnQ3S1/L+sthDTHtCMhcEiklmIly6uQ3w==}
@@ -4487,6 +4494,8 @@ snapshots:
   '@sindresorhus/merge-streams@2.3.0': {}
 
   '@sindresorhus/merge-streams@4.0.0': {}
+
+  '@stablelib/base64@2.0.1': {}
 
   '@stablelib/binary@2.0.1':
     dependencies:
