@@ -1,3 +1,3 @@
+export * from './chains';
 export * from './constants';
-export * from './configs';
 export * from './types';
