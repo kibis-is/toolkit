@@ -48,9 +48,9 @@ The root `package.json` utilizes `pnpm`'s workspace feature. The root `package.j
 
 The `packages/` directory contains, as the name suggests, the packages of the monorepo.
 
-#### `packages/<package>` Directory
+#### `packages/<package_name>` Directory
 
-Each package **SHOULD** reflect the name of the package, i.e. the `packages/sigillum/` and **SHOULD** contain the following files and directories:
+Each package **SHOULD** reflect the name of the package, i.e. the `packages/<package_name>/` and **SHOULD** contain the following files and directories:
 
 * `.lintstagedrc.mjs` - Scripts to run on the pre-commit hook. This file is **REQUIRED**, however, if there are no scripts to run, use an empty file.
 * `LICENSE` - The license for the package.
@@ -81,15 +81,16 @@ pnpm install
 
 ### 3.1. Packages
 
-| Name                                                                                      | Visibility | Description                                  | Package                                                                                                                   |
-|-------------------------------------------------------------------------------------------|------------|----------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|
-| [`utilities`](https://github.com/kibis-is/toolkit/blob/main/packages/utilities/README.md) | `public`   | TypeScript utilities for Kibisis apps/tools. | [![NPM Version](https://img.shields.io/npm/v/%40kibisis%2Futilities)](https://www.npmjs.com/package/%40kibisis/utilities) |
+| Name                                                                                               | Visibility | Description                                      | Package                                                                                                                   |
+|----------------------------------------------------------------------------------------------------|------------|--------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|
+| [`@kibisis/chains`](https://github.com/kibis-is/toolkit/blob/main/packages/chains/README.md)       | `public`   | Configurations and utilities for the AVM chains. | [![NPM Version](https://img.shields.io/npm/v/%40kibisis%2Fchains)](https://www.npmjs.com/package/%40kibisis/chains)       |
+| [`@kibisis/utilities`](https://github.com/kibis-is/toolkit/blob/main/packages/utilities/README.md) | `public`   | TypeScript utilities for Kibisis apps/tools.     | [![NPM Version](https://img.shields.io/npm/v/%40kibisis%2Futilities)](https://www.npmjs.com/package/%40kibisis/utilities) |
 
 <sup>[Back to top ^][table-of-contents]</sup>
 
 ## 👏 4. How to contribute
 
-Please read the [**contributing guide**](./CONTRIBUTING.md) to learn about the development process.
+Please read the [**contributing guide**](https://github.com/kibis-is/toolkit/blob/main/CONTRIBUTING.md) to learn about the development process.
 
 <sup>[Back to top ^][table-of-contents]</sup>
 
