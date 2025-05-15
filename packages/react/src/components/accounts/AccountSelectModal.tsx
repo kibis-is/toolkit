@@ -7,7 +7,6 @@ import {
   Spacer,
   Stack,
   Text,
-  Tooltip,
   VStack,
 } from '@chakra-ui/react';
 import { upsertItemsByKey } from '@kibisis/utilities';
@@ -17,16 +16,13 @@ import { useTranslation } from 'react-i18next';
 import { IoCheckmarkOutline, IoChevronForward, IoSearchOutline } from 'react-icons/io5';
 
 // components
-import { AccountAvatar, Button, EmptyState } from '@/components';
+import { AccountAvatar, Button, EmptyState, Modal } from '@/components';
 
 // constants
 import { DEFAULT_GAP, TAB_ITEM_HEIGHT } from '@/constants';
 
 // hooks
 import { useBackgroundColorCode, useButtonHoverBackgroundColor, useDefaultTextColor, usePrimaryColorPalette, useSubTextColor } from '@/hooks';
-
-// theme
-import { theme } from '@/theme';
 
 // types
 import type { IAccount, TAccountSelectModalProps } from '@/types';
@@ -57,6 +53,7 @@ const AccountSelectModal: FC<TAccountSelectModalProps> = ({
   const [selectedAccounts, setSelectedAccounts] = useState<IAccount[]>([]);
   // memos
   const _iconSize = useMemo(() => iconSize('md'), []);
+  const indeterminate = useMemo(() => selectedAccounts.length > 0 && selectedAccounts.length < accounts.length, [selectedAccounts]);
   // callbacks
   const handleOnAccountChange = useCallback((account: IAccount) => () => {
     // for a single selection, just return the account
@@ -73,7 +70,7 @@ const AccountSelectModal: FC<TAccountSelectModalProps> = ({
   }, [selectedAccounts, setSelectedAccounts]);
   const reset = useCallback(() => setSelectedAccounts([]), [setSelectedAccounts]);
   const handleClose = useCallback(() => {
-    onClose && onClose();
+    onClose?.();
 
     reset(); // clean up
   }, [onClose, reset]);
@@ -85,7 +82,7 @@ const AccountSelectModal: FC<TAccountSelectModalProps> = ({
   const handleConfirmClick = useCallback(() => handleConfirm(selectedAccounts), [handleConfirm, selectedAccounts]);
   const handleOnSelectAllCheckChange = useCallback(() => {
     if (selectedAccounts.length <= 0) {
-      return setSelectedAccounts(allowWatchAccounts ? accounts : accounts.filter((value) => !value.watchAccount));
+      return setSelectedAccounts(allowWatchAccounts ? accounts : accounts.filter((value) => !value.watch));
     }
 
     setSelectedAccounts([]);
@@ -172,132 +169,120 @@ const AccountSelectModal: FC<TAccountSelectModalProps> = ({
 
     return (
       accounts.map((account, index) => {
-      return (
-        <ChakraButton
-          _hover={{
-            bg: backgroundColor,
-          }}
-          borderRadius="full"
-          cursor="not-allowed"
-          fontSize="md"
-          h={TAB_ITEM_HEIGHT}
-          justifyContent="start"
-          key={`${context}-account-select-modal-item-${index}`}
-          px={DEFAULT_GAP / 2}
-          py={0}
-          sx={{
-            opacity: 0.6,
-          }}
-          variant="ghost"
-          w="full"
-          {...((allowWatchAccounts || !account.watch) && {
-            _hover: {
-              bg: buttonHoverBackgroundColor,
-            },
-            cursor: 'pointer',
-            onClick: handleOnAccountChange(account),
-            sx: {
-              opacity: 1,
-            },
-            rightIcon: multiple ? (
-              <Checkbox
-                colorPalette={primaryColorPalette}
-                isChecked={!!selectedAccounts.find((value) => value.address === account.address)}
-                pointerEvents="none"
+        return (
+          <ChakraButton
+            _hover={{
+              bg: backgroundColor,
+            }}
+            borderRadius="full"
+            cursor="not-allowed"
+            fontSize="md"
+            h={TAB_ITEM_HEIGHT}
+            justifyContent="start"
+            key={`${context}-account-select-modal-item-${index}`}
+            px={DEFAULT_GAP / 2}
+            py={0}
+            sx={{
+              opacity: 0.6,
+            }}
+            variant="ghost"
+            w="full"
+            {...((allowWatchAccounts || !account.watch) && {
+              _hover: {
+                bg: buttonHoverBackgroundColor,
+              },
+              cursor: 'pointer',
+              onClick: handleOnAccountChange(account),
+              sx: {
+                opacity: 1,
+              },
+            })}
+          >
+            <HStack gap={DEFAULT_GAP - 2} py={DEFAULT_GAP - 2} w="full">
+              {/*account icon*/}
+              <AccountAvatar
+                account={account}
+                badges={{
+                  watch: account.watch,
+                }}
+                colorMode={colorMode}
               />
+
+              {/*name/address*/}
+              {renderNameAddress(account)}
+            </HStack>
+
+            {multiple ? (
+              <Checkbox.Root
+                colorPalette={primaryColorPalette}
+                checked={!!selectedAccounts.find((value) => value.address === account.address)}
+                pointerEvents="none"
+              >
+                <Checkbox.HiddenInput />
+                <Checkbox.Control />
+              </Checkbox.Root>
             ) : (
               <Icon as={IoChevronForward} color={defaultTextColor} h={_iconSize} w={_iconSize} />
-            ),
-          })}
-        >
-          <HStack gap={DEFAULT_GAP - 2} py={DEFAULT_GAP - 2} w="full">
-            {/*account icon*/}
-            <AccountAvatar
-              account={account}
-              badges={{
-                watch: account.watch,
-              }}
-              colorMode={colorMode}
-            />
-
-            {/*name/address*/}
-            {renderNameAddress(account)}
-          </HStack>
-        </ChakraButton>
-      );
-    });
+            )}
+          </ChakraButton>
+        );
+    }));
   };
 
   return (
-    <Modal isOpen={isOpen} motionPreset="slideInBottom" onClose={handleClose} size="full" scrollBehavior="inside">
-      <ModalOverlay />
+    <Modal
+      body={(
+        <VStack gap={1} w="full">
+          {renderContent()}
+        </VStack>
+      )}
+      colorMode={colorMode}
+      footer={(
+        <HStack gap={DEFAULT_GAP - 2} w="full">
+          <Button colorMode={colorMode} onClick={handleCancelClick} size="lg" variant="outline" w="full">
+            {t('buttons.cancel')}
+          </Button>
 
-      <ModalContent
-        alignSelf="flex-end"
-        backgroundColor={BODY_BACKGROUND_COLOR}
-        borderTopRadius={theme.radii['3xl']}
-        borderBottomRadius={0}
-        maxH="75%"
-        minH={0}
-      >
-        {/*heading*/}
-        <ModalHeader display="flex" justifyContent="center" px={DEFAULT_GAP}>
-          <VStack spacing={DEFAULT_GAP - 2} w="full">
-            {/*heading*/}
-            <Heading color={defaultTextColor} size="md" textAlign="center" w="full">
-              {title || t<string>(multiple ? 'headings.selectAccounts' : 'headings.selectAccount')}
-            </Heading>
-
-            {/*select all accounts*/}
-            {multiple && (
-              <Stack alignItems="flex-end" justifyContent="center" px={DEFAULT_GAP / 2} w="full">
-                <Tooltip
-                  aria-label={t<string>('labels.selectAllAccounts')}
-                  label={t<string>('labels.selectAllAccounts')}
-                >
-                  <Checkbox
-                    colorScheme={primaryColorScheme}
-                    isChecked={selectedAccounts.length === accounts.length}
-                    isIndeterminate={selectedAccounts.length > 0 && selectedAccounts.length < accounts.length}
-                    onChange={handleOnSelectAllCheckChange}
-                  />
-                </Tooltip>
-              </Stack>
-            )}
-          </VStack>
-        </ModalHeader>
-
-        {/*body*/}
-        <ModalBody px={DEFAULT_GAP}>
-          <VStack spacing={1} w="full">
-            {renderContent()}
-          </VStack>
-        </ModalBody>
-
-        {/*footer*/}
-        <ModalFooter p={DEFAULT_GAP}>
-          <HStack spacing={DEFAULT_GAP - 2} w="full">
-            <Button colorMode={colorMode} onClick={handleCancelClick} size="lg" variant="outline" w="full">
-              {t<string>('buttons.cancel')}
+          {multiple && (
+            <Button
+              colorMode={colorMode}
+              onClick={handleConfirmClick}
+              size="lg"
+              variant="solid"
+              w="full"
+            >
+              {t('buttons.confirm')}
+              <Icon as={IoCheckmarkOutline} color={defaultTextColor} h={_iconSize} w={_iconSize} />
             </Button>
+          )}
+        </HStack>
+      )}
+      header={(
+        <VStack gap={DEFAULT_GAP - 2} p={DEFAULT_GAP} w="full">
+          {/*heading*/}
+          <Heading color={defaultTextColor} size="md" textAlign="center" w="full">
+            {title || t(multiple ? 'headings.selectAccounts' : 'headings.selectAccount')}
+          </Heading>
 
-            {multiple && (
-              <Button
-                colorMode={colorMode}
-                onClick={handleConfirmClick}
-                rightIcon={<IoCheckmarkOutline />}
-                size="lg"
-                variant="solid"
-                w="full"
+          {/*select all accounts*/}
+          {multiple && (
+            <Stack align="flex-end" justify="center" px={DEFAULT_GAP / 2} w="full">
+              <Checkbox.Root
+                checked={indeterminate ? 'indeterminate' : selectedAccounts.length === accounts.length}
+                onCheckedChange={handleOnSelectAllCheckChange}
               >
-                {t<string>('buttons.confirm')}
-              </Button>
-            )}
-          </HStack>
-        </ModalFooter>
-      </ModalContent>
-    </Modal>
+                <Checkbox.HiddenInput />
+                <Checkbox.Control />
+              </Checkbox.Root>
+            </Stack>
+          )}
+        </VStack>
+      )}
+      open={open}
+    />
   );
 };
+
+AccountSelectModal.displayName = 'AccountSelectModal';
 
 export default AccountSelectModal;

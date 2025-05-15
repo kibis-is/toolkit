@@ -76,9 +76,10 @@ const AccountSelect: FC<TAccountSelectProps> = ({
             borderColor: borderColor,
           }}
           alignItems="center"
+          borderColor={borderColor}
+          borderRadius="full"
           borderStyle="solid"
           borderWidth="1px"
-          borderRadius="full"
           h={INPUT_HEIGHT}
           justifyContent="space-between"
           onClick={handleOnClick}
@@ -96,7 +97,7 @@ const AccountSelect: FC<TAccountSelectProps> = ({
               </Text>
             )}
 
-            <Icon boxSize={iconSize()} color={subTextColor}>
+            <Icon boxSize={iconSize('sm')} color={subTextColor}>
               <IoChevronDownOutline />
             </Icon>
           </HStack>
@@ -105,5 +106,7 @@ const AccountSelect: FC<TAccountSelectProps> = ({
     </>
   );
 };
+
+AccountSelect.displayName = 'AccountSelect';
 
 export default AccountSelect;
