@@ -10,6 +10,7 @@ jobs:
     permissions:
       pull-requests: read
     outputs:
+      chains: ${{ steps.filter.outputs.chains }}
       icons: ${{ steps.filter.outputs.icons }}
       react: ${{ steps.filter.outputs.react }}
       utilities: ${{ steps.filter.outputs.utilities }}
@@ -19,6 +20,8 @@ jobs:
         id: filter
         with:
           filters: |
+            chains:
+              - 'packages/chains/**'
             icons:
               - 'packages/icons/**'
             react:
@@ -52,6 +55,14 @@ jobs:
   ##
   # package specific
   ##
+
+  lint_build_test_chains:
+    name: "Lint, Build & Test - @kibisis/chains"
+    needs: [changed_files, validate_pr_title]
+    if: ${{ needs.changed_files.outputs.chains == 'true' }}
+    uses: ./.github/workflows/lint_build_test.yml
+    with:
+      package_name: "@kibisis/chains"
 
   lint_build_test_icons:
     name: "Lint, Build & Test - @kibisis/icons"

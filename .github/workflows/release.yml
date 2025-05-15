@@ -17,8 +17,18 @@ permissions:
   pull-requests: write # to be able to comment on released pull requests
 
 jobs:
+  release_chains:
+    name: "Release - @kibisis/chains"
+    uses: ./.github/workflows/publish_release.yml
+    with:
+      package_dir: "chains"
+      package_name: "@kibisis/chains"
+    secrets:
+      NPM_TOKEN: ${{ secrets.NPM_PUBLISH_PACKAGES_ACCESS_TOKEN }}
+
   release_icons:
     name: "Release - @kibisis/icons"
+    needs: [release_chains]
     uses: ./.github/workflows/publish_release.yml
     with:
       package_dir: "icons"
@@ -26,7 +36,7 @@ jobs:
 
   release_utilities:
     name: "Release - @kibisis/utilities"
-    needs: [release_icons]
+    needs: [release_chains, release_icons]
     uses: ./.github/workflows/publish_release.yml
     with:
       package_dir: "utilities"
@@ -37,7 +47,7 @@ jobs:
   # **MUST** come after [@kibisis/icons, @kibisis/utilities] as it uses them as dependencies
   release_react:
     name: "Release - @kibisis/react"
-    needs: [release_icons, release_utilities]
+    needs: [release_chains, release_icons, release_utilities]
     uses: ./.github/workflows/publish_release.yml
     with:
       package_dir: "react"
