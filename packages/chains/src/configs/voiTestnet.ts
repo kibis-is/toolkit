@@ -10,7 +10,7 @@ const chain: Chain = {
       canonicalName: 'Nodely',
       id: 'nodely',
       origin: 'https://testnet-api.voi.nodely.dev',
-    }
+    },
   ],
   displayName: 'Voi Network Testnet',
   indexers: [
@@ -18,7 +18,7 @@ const chain: Chain = {
       canonicalName: 'Nodely',
       id: 'nodely',
       origin: 'https://testnet-idx.voi.nodely.dev',
-    }
+    },
   ],
   isTestnet: true,
   nativeCurrency: {

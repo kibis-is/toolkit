@@ -12,7 +12,7 @@ const chain: Chain = {
         canonicalName: 'Nodely',
         id: 'nodely',
         origin: 'https://mainnet-api.voi.nodely.dev',
-      }
+      },
     ],
   },
   displayName: 'Voi Network',
@@ -23,7 +23,7 @@ const chain: Chain = {
         canonicalName: 'Nodely',
         id: 'nodely',
         origin: 'https://mainnet-idx.voi.nodely.dev',
-      }
+      },
     ],
   },
   isTestnet: false,

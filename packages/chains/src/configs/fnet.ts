@@ -12,7 +12,7 @@ const chain: Chain = {
         canonicalName: 'Nodely',
         id: 'nodely',
         origin: 'https://fnet-api.4160.nodely.dev',
-      }
+      },
     ],
   },
   displayName: 'Algorand FNet',
@@ -23,7 +23,7 @@ const chain: Chain = {
         canonicalName: 'Nodely',
         id: 'nodely',
         origin: 'https://fnet-idx.4160.nodely.dev',
-      }
+      },
     ],
   },
   isTestnet: true,

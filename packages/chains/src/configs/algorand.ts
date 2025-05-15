@@ -12,7 +12,7 @@ const chain: Chain = {
         canonicalName: 'Nodely',
         id: 'nodely',
         origin: 'https://mainnet-api.4160.nodely.dev',
-      }
+      },
     ],
   },
   displayName: 'Algorand',
@@ -23,7 +23,7 @@ const chain: Chain = {
         canonicalName: 'Nodely',
         id: 'nodely',
         origin: 'https://mainnet-idx.4160.nodely.dev',
-      }
+      },
     ],
   },
   isTestnet: false,

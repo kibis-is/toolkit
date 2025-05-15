@@ -12,7 +12,7 @@ const chain: Chain = {
         canonicalName: 'Nodely',
         id: 'nodely',
         origin: 'https://betanet-api.4160.nodely.dev',
-      }
+      },
     ],
   },
   displayName: 'Algorand Betanet',
@@ -23,7 +23,7 @@ const chain: Chain = {
         canonicalName: 'Nodely',
         id: 'nodely',
         origin: 'https://betanet-idx.4160.nodely.dev',
-      }
+      },
     ],
   },
   isTestnet: true,
