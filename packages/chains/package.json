@@ -38,6 +38,7 @@
     "vite-tsconfig-paths": "catalog:"
   },
   "dependencies": {
-    "@stablelib/base64": "^2.0.1"
+    "@stablelib/base64": "^2.0.1",
+    "axios": "^1.9.0"
   }
 }

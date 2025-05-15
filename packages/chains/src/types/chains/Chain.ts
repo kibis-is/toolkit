@@ -1,6 +1,5 @@
 // types
-import type NativeCurrency from './NativeCurrency';
-import type NodeCollection from './NodeCollection';
+import type { NativeCurrency, NodeCollection } from '@/types';
 
 /**
  * @property {NodeCollection} algods - A collection of Algod nodes.
