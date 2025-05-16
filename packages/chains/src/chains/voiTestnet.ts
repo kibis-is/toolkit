@@ -5,6 +5,9 @@ import { DEFAULT_AVM_DECIMALS, VOI_ICON_URI } from '@/constants';
 import type { Chain } from '@/types';
 
 const chain: Chain = {
+  caip002: {
+    namespace: 'avm',
+  },
   algods: {
     default: 0,
     nodes: [

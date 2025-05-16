@@ -5,6 +5,9 @@ import { ALGORAND_ICON_URI, DEFAULT_AVM_DECIMALS } from '@/constants';
 import type { Chain } from '@/types';
 
 const chain: Chain = {
+  caip002: {
+    namespace: 'algorand',
+  },
   algods: {
     default: 0,
     nodes: [
