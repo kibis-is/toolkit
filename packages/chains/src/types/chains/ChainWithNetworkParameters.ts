@@ -8,7 +8,7 @@ import type { CAIP002, Chain } from '@/types';
  * @property {string} genesisHash - A base64 encoded hash of the genesis block.
  * @property {string} genesisID - A human-readable identifier for the network.
  */
-interface ChainWithNetworkParameters extends Chain {
+interface ChainWithNetworkParameters extends Omit<Chain, 'caip002'> {
   caip002: CAIP002;
   fee: bigint;
   feeSinkAddress: string;
