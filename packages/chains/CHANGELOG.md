@@ -1,3 +1,10 @@
+# [@kibisis/chains-v1.1.1](https://github.com/kibis-is/toolkit/compare/@kibisis/chains-v1.1.0...@kibisis/chains-v1.1.1) (2025-05-16)
+
+
+### Bug Fixes
+
+* **@kibisis/chains:** add utilities ([#4](https://github.com/kibis-is/toolkit/issues/4)) ([cb88059](https://github.com/kibis-is/toolkit/commit/cb8805981deeabe0a7e1dee88d3777e21a7f5b3c))
+
 # [@kibisis/chains-v1.1.0](https://github.com/kibis-is/toolkit/compare/@kibisis/chains-v1.0.0...@kibisis/chains-v1.1.0) (2025-05-16)
 
 
