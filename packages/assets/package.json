@@ -1,0 +1,51 @@
+{
+  "name": "@kibisis/assets",
+  "version": "1.0.0",
+  "private": false,
+  "description": "Provides the tools necessary to easily create and interact with AVM assets, including standard assets (SA), ARC-0200 compliant assets and ARC-0072 compliant assets.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kibis-is/toolkit"
+  },
+  "license": "CC0-1.0",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "vite build",
+    "build:dependencies": "./scripts/prebuild.sh",
+    "generate:index": "tsx ./scripts/generate-index.ts",
+    "lint": "eslint .",
+    "prettier": "prettier --write \"**/*.{js,json,ts}\"",
+    "test": "vitest run --config vitest.config.ts"
+  },
+  "devDependencies": {
+    "@eslint/js": "catalog:",
+    "@types/node": "catalog:",
+    "algosdk": "^3.x",
+    "chalk": "catalog:",
+    "eslint": "catalog:",
+    "eslint-config-prettier": "catalog:",
+    "globals": "catalog:",
+    "prettier": "catalog:",
+    "shx": "catalog:",
+    "tsx": "catalog:",
+    "typescript": "catalog:",
+    "typescript-eslint": "catalog:",
+    "vite": "catalog:",
+    "vite-plugin-dts": "catalog:",
+    "vite-tsconfig-paths": "catalog:",
+    "vitest": "catalog:"
+  },
+  "peerDependencies": {
+    "algosdk": "^3.x"
+  },
+  "dependencies": {
+    "@kibisis/chains": "workspace:",
+    "@kibisis/utilities": "workspace:",
+    "@stablelib/base64": "catalog:"
+  }
+}
