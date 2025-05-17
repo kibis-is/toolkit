@@ -10,6 +10,7 @@ jobs:
     permissions:
       pull-requests: read
     outputs:
+      assets: ${{ steps.filter.outputs.assets }}
       chains: ${{ steps.filter.outputs.chains }}
       utilities: ${{ steps.filter.outputs.utilities }}
     steps:
@@ -18,6 +19,8 @@ jobs:
         id: filter
         with:
           filters: |
+            assets:
+              - 'packages/assets/**'
             chains:
               - 'packages/chains/**'
             utilities:
@@ -49,6 +52,14 @@ jobs:
   ##
   # package specific
   ##
+
+  lint_build_test_assets:
+    name: "Lint, Build & Test - @kibisis/assets"
+    needs: [changed_files, validate_pr_title]
+    if: ${{ needs.changed_files.outputs.assets == 'true' }}
+    uses: ./.github/workflows/lint_build_test.yml
+    with:
+      package_name: "@kibisis/assets"
 
   lint_build_test_chains:
     name: "Lint, Build & Test - @kibisis/chains"

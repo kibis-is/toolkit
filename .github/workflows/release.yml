@@ -35,3 +35,14 @@ jobs:
       package_name: "@kibisis/utilities"
     secrets:
       NPM_TOKEN: ${{ secrets.NPM_PUBLISH_PACKAGES_ACCESS_TOKEN }}
+
+  # **MUST** come after [release_chains, release_utilities] as it uses them as dependencies
+  release_assets:
+    name: "Release - @kibisis/assets"
+    needs: [release_chains, release_utilities]
+    uses: ./.github/workflows/publish_release.yml
+    with:
+      package_dir: "assets"
+      package_name: "@kibisis/assets"
+    secrets:
+      NPM_TOKEN: ${{ secrets.NPM_PUBLISH_PACKAGES_ACCESS_TOKEN }}
