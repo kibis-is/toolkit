@@ -8,7 +8,13 @@ import abi from '@/abis/arc0200.abi.json';
 import BaseApplication from './BaseApplication';
 
 // errors
-import { InvalidABIError, InvalidBoxReferenceError, SendTransactionError, SigningError } from '@/errors';
+import {
+  InvalidABIError,
+  InvalidBoxReferenceError,
+  InsufficientBalanceError,
+  SendTransactionError,
+  SigningError,
+} from '@/errors';
 
 // types
 import type { BaseApplicationParameters, TransferParameters } from '@/types';
@@ -324,6 +330,7 @@ export default class ARC0200Asset extends BaseApplication {
    * @returns {Promise<[string, ...string[]]>} A promise that resolves 1-2 transaction IDs. If required, the first
    * transaction will be a payment transaction to pay for the box storage for the receiver account. The last transaction
    * will be the application call to transfer the assets.
+   * @throws {InsufficientBalanceError} If the sender is attempting to send more than their balance.
    * @throws {InvalidABIError} If the ABI is invalid or the method does not conform to the ABI.
    * @throws {InvalidBoxReferenceError} If the box reference for the sender and receiver could not be determined.
    * @throws {SigningError} If there was an issue signing the transaction(s).
@@ -331,8 +338,15 @@ export default class ARC0200Asset extends BaseApplication {
    */
   public async transfer({ privateKey, ...transactionParams }: TransferParameters): Promise<[string, ...string[]]> {
     const __logPrefix = `${ARC0200Asset.displayName}#transfer`;
+    const balance = await this.balanceOf(transactionParams.sender);
     const transactions: algosdk.Transaction[] = await this.buildTransferTransactions(transactionParams);
     let signedTransactions: Uint8Array[];
+
+    if (balance < transactionParams.amount) {
+      throw new InsufficientBalanceError(
+        `sender "${transactionParams.sender}" has insufficient balance to complete transfer, trying to send "${transactionParams.amount}" but only has "${balance}"`
+      );
+    }
 
     try {
       signedTransactions = transactions.map((transaction) => transaction.signTxn(privateKey));
