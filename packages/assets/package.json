@@ -46,6 +46,8 @@
   "dependencies": {
     "@kibisis/chains": "workspace:",
     "@kibisis/utilities": "workspace:",
-    "@stablelib/base64": "catalog:"
+    "@stablelib/base64": "catalog:",
+    "@stablelib/utf8": "catalog:",
+    "buffer": "^6.0.3"
   }
 }

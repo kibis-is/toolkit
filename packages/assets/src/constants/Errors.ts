@@ -1,0 +1,9 @@
+// abi
+export const ABI_READ_ERROR = 'ABI_READ_ERROR';
+export const INVALID_ABI_ERROR = 'INVALID_ABI_ERROR';
+// storage
+export const INVALID_BOX_REFERENCE_ERROR = 'INVALID_BOX_REFERENCE_ERROR';
+// signing
+export const SIGNING_ERROR = 'SIGNING_ERROR';
+// transactions
+export const SEND_TRANSACTION_ERROR = 'SEND_TRANSACTION_ERROR';
