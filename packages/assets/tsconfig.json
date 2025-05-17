@@ -16,9 +16,7 @@
     "noImplicitReturns": true,
     "noImplicitThis": true,
     "paths": {
-      "@/*": ["src/*"],
-      "@kibisis/chains": ["../chains/src"],
-      "@kibisis/utilities": ["../utilities/src"]
+      "@/*": ["src/*"]
     },
     "removeComments": false,
     "resolveJsonModule": true,
@@ -28,13 +26,5 @@
     "strictNullChecks": true,
     "strictPropertyInitialization": false,
     "target": "ES2020"
-  },
-  "references": [
-    {
-      "path": "../chains"
-    },
-    {
-      "path": "../utilities"
-    }
-  ]
+  }
 }

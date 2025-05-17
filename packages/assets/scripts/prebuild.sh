@@ -10,6 +10,7 @@
 function main {
   # build workspace dependencies
   pnpm -F @kibisis/chains build
+  pnpm -F @kibisis/utilities build
 
   exit 0
 }

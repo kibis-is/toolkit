@@ -17,8 +17,8 @@ function main(): void {
   for (const item of readdirSync(srcDir)) {
     stat = statSync(join(srcDir, item));
 
-    // if it is not a directory, move on
-    if (!stat.isDirectory()) {
+    // if it is not a directory, or the abis, move on
+    if (!stat.isDirectory() || item === 'abis') {
       continue;
     }
 
