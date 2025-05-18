@@ -1,3 +1,10 @@
+# [@kibisis/chains-v1.1.2](https://github.com/kibis-is/toolkit/compare/@kibisis/chains-v1.1.1...@kibisis/chains-v1.1.2) (2025-05-18)
+
+
+### Bug Fixes
+
+* **@kibisis/chains:** add port when fetching network parameters ([#5](https://github.com/kibis-is/toolkit/issues/5)) ([50e38ae](https://github.com/kibis-is/toolkit/commit/50e38aee4615fe2e480a4f2ebe77d498d28385d2))
+
 # [@kibisis/chains-v1.1.1](https://github.com/kibis-is/toolkit/compare/@kibisis/chains-v1.1.0...@kibisis/chains-v1.1.1) (2025-05-16)
 
 
