@@ -7,6 +7,11 @@ on:
         description: "The pnpm package name."
         required: true
         type: string
+      with_network:
+        default: false
+        description: "Whether a local avm network is used to run tests alongside."
+        required: false
+        type: boolean
 
 jobs:
   lint:
@@ -38,6 +43,7 @@ jobs:
           pnpm -F ${{ inputs.package_name }} run build
 
   test:
+    if: ${{ inputs.with_network == false }}
     name: "Test"
     runs-on: ubuntu-latest
     steps:
@@ -51,3 +57,18 @@ jobs:
         run: |
           pnpm -F ${{ inputs.package_name }} run build:dependencies
           pnpm -F ${{ inputs.package_name }} run test
+
+  test_with_network:
+    if: ${{ inputs.with_network == true }}
+    name: "Test"
+    runs-on: ubuntu-latest
+    steps:
+      - name: "🛎 Checkout"
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - name: "🔧 Setup"
+        uses: ./.github/actions/use-pnpm-dependencies
+      - name: "🧪 Test"
+        run: |
+          ./scripts/test_with_network.sh "${{ inputs.package_name }}"

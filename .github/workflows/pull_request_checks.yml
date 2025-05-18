@@ -60,6 +60,7 @@ jobs:
     uses: ./.github/workflows/lint_build_test.yml
     with:
       package_name: "@kibisis/assets"
+      with_network: true
 
   lint_build_test_chains:
     name: "Lint, Build & Test - @kibisis/chains"
@@ -68,6 +69,7 @@ jobs:
     uses: ./.github/workflows/lint_build_test.yml
     with:
       package_name: "@kibisis/chains"
+      with_network: false
 
   lint_build_test_utilities:
     name: "Lint, Build & Test - @kibisis/utilities"
@@ -76,3 +78,4 @@ jobs:
     uses: ./.github/workflows/lint_build_test.yml
     with:
       package_name: "@kibisis/utilities"
+      with_network: false
