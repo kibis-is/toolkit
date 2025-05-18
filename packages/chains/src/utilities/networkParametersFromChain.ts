@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { type AxiosRequestConfig } from 'axios';
 
 // types
 import type { Chain, ChainWithNetworkParameters, GenesisResponse, TransactionParamsResponse } from '@/types';
@@ -16,9 +16,17 @@ import defaultNode from './defaultNode';
  */
 export default async function networkParametersFromChain(chain: Chain): Promise<ChainWithNetworkParameters> {
   const algod = defaultNode(chain.algods);
+  const baseURL = `${algod.origin}${algod.port ? `:${algod.port}` : ''}`;
+  const config: AxiosRequestConfig | undefined = algod.token
+    ? {
+        headers: {
+          ['X-Algo-API-Token']: algod.token,
+        },
+      }
+    : undefined;
   const [{ data: transactionParams }, { data: genesis }] = await Promise.all([
-    axios.get<TransactionParamsResponse>(`${algod.origin}/v2/transactions/params`),
-    axios.get<GenesisResponse>(`${algod.origin}/genesis`),
+    axios.get<TransactionParamsResponse>(`${baseURL}/v2/transactions/params`, config),
+    axios.get<GenesisResponse>(`${baseURL}/genesis`, config),
   ]);
   const genesisHash = transactionParams['genesis-hash'];
 
