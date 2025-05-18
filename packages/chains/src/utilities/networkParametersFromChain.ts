@@ -16,9 +16,10 @@ import defaultNode from './defaultNode';
  */
 export default async function networkParametersFromChain(chain: Chain): Promise<ChainWithNetworkParameters> {
   const algod = defaultNode(chain.algods);
+  const baseURL = `${algod.origin}${algod.port ? `:${algod.port}` : ''}`;
   const [{ data: transactionParams }, { data: genesis }] = await Promise.all([
-    axios.get<TransactionParamsResponse>(`${algod.origin}/v2/transactions/params`),
-    axios.get<GenesisResponse>(`${algod.origin}/genesis`),
+    axios.get<TransactionParamsResponse>(`${baseURL}/v2/transactions/params`),
+    axios.get<GenesisResponse>(`${baseURL}/genesis`),
   ]);
   const genesisHash = transactionParams['genesis-hash'];
 
