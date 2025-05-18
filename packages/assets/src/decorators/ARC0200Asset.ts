@@ -17,7 +17,7 @@ import {
 } from '@/errors';
 
 // types
-import type { BaseApplicationParameters, TransferParameters } from '@/types';
+import type { AllowanceParameters, BaseApplicationParameters, TransferParameters } from '@/types';
 
 // utilities
 import { calculateMBRForBox, trimNullBytes } from '@/utilities';
@@ -50,33 +50,60 @@ export default class ARC0200Asset extends BaseApplication {
    */
 
   /**
+   * Gets the amount that a given spender is authorized to spend of an owner's account.
+   * @param {AllowanceParameters} params - The address of owner and the address of the spender.
+   * @returns {Promise<bigint>} A promise that resolves to the balance of the account.
+   * @throws {ABIReadError} If there was error while simulating a transaction to read.
+   * @throws {InvalidABIError} If the application didn't return any results.
+   * @public
+   */
+  public async allowance({ owner, spender }: AllowanceParameters): Promise<bigint> {
+    const __logPrefix = `${ARC0200Asset.displayName}#allowance`;
+    let abiMethod: algosdk.ABIMethod;
+    let result: bigint | null;
+
+    try {
+      abiMethod = this._abi.getMethodByName('arc200_allowance');
+
+      result = await this.read<bigint>({
+        abiMethod,
+        args: [
+          (abiMethod.args[0]?.type as algosdk.ABIAddressType).encode(owner),
+          (abiMethod.args[1]?.type as algosdk.ABIAddressType).encode(spender),
+        ],
+      });
+    } catch (error) {
+      this._logger.error(`${__logPrefix}:`, error);
+
+      throw error;
+    }
+
+    if (!result) {
+      throw new InvalidABIError(`application "${this._appID}" not valid because the result returned "null"`);
+    }
+
+    return result;
+  }
+
+  /**
    * Gets the balance of the asset for a given address.
    * @param {string} address - The address of the account to check.
    * @returns {Promise<bigint>} A promise that resolves to the balance of the account.
-   * @throws {InvalidABIError} If the ABI is invalid or the method does not conform to the ABI.
    * @throws {ABIReadError} If there was error while simulating a transaction to read.
+   * @throws {InvalidABIError} If the application didn't return any results.
    * @public
    */
   public async balanceOf(address: string): Promise<bigint> {
     const __logPrefix = `${ARC0200Asset.displayName}#balanceOf`;
-    let abiAddressArgType: algosdk.ABIType | null;
     let abiMethod: algosdk.ABIMethod;
     let result: bigint | null;
 
     try {
       abiMethod = this._abi.getMethodByName('arc200_balanceOf');
-      abiAddressArgType = abiMethod.args[0]?.type as algosdk.ABIType;
-
-      // if the first arg, owner, is not an address
-      if (!abiAddressArgType || abiAddressArgType.toString() !== 'address') {
-        throw new InvalidABIError(
-          `application "${this._appID}" not valid as method "${abiMethod.name}" has an invalid "owner" parameter`
-        );
-      }
 
       result = await this.read<bigint>({
         abiMethod,
-        args: [abiAddressArgType.encode(address)],
+        args: [(abiMethod.args[0]?.type as algosdk.ABIAddressType).encode(address)],
       });
     } catch (error) {
       this._logger.error(`${__logPrefix}:`, error);
@@ -100,7 +127,6 @@ export default class ARC0200Asset extends BaseApplication {
    * @returns {Promise<algosdk.Transaction[]>} A promise that resolves 1-2 transaction. If required, the first
    * transaction will be a payment transaction to pay for the box storage for the receiver account. The last transaction
    * will be the application call to transfer the assets.
-   * @throws {InvalidABIError} If the ABI is invalid or the method does not conform to the ABI.
    * @throws {InvalidBoxReferenceError} If the box reference for the sender and receiver could not be determined.
    * @public
    */
@@ -117,7 +143,6 @@ export default class ARC0200Asset extends BaseApplication {
     let boxReferences: algosdk.modelsv2.BoxReference[] | null;
     let boxStorageCost: bigint;
     let encodedAmount: Uint8Array;
-    let encodedReceiver: Uint8Array;
     let paymentTransaction: algosdk.Transaction | null = null;
     let receiverBalance: bigint;
     let suggestedParams: algosdk.SuggestedParams;
@@ -127,23 +152,8 @@ export default class ARC0200Asset extends BaseApplication {
     try {
       abiMethod = this._abi.getMethodByName('arc200_transfer');
 
-      // check the "to" arg
-      if (!abiMethod.args[0] || abiMethod.args[0].type.toString() !== 'address') {
-        throw new InvalidABIError(
-          `application "${this._appID}" not valid as method "${abiMethod.name}" has an invalid "to" type`
-        );
-      }
-
-      // check the "value" arg
-      if (!abiMethod.args[1] || abiMethod.args[1].type.toString() !== 'uint256') {
-        throw new InvalidABIError(
-          `application "${this._appID}" not valid as method "${abiMethod.name}" has an invalid "value" type`
-        );
-      }
-
-      encodedAmount = (abiMethod.args[1].type as algosdk.ABIType).encode(amount);
-      encodedReceiver = (abiMethod.args[0].type as algosdk.ABIType).encode(receiver);
-      args = [encodedReceiver, encodedAmount];
+      encodedAmount = (abiMethod.args[1].type as algosdk.ABIUintType).encode(amount);
+      args = [(abiMethod.args[0].type as algosdk.ABIAddressType).encode(receiver), encodedAmount];
       receiverBalance = await this.balanceOf(receiver);
       suggestedParams = await this._algod.getTransactionParams().do();
       boxReferences = await this._determineBoxReferences({
@@ -206,8 +216,8 @@ export default class ARC0200Asset extends BaseApplication {
   /**
    * Gets the decimals of the asset.
    * @returns {Promise<bigint>} A promise that resolves to the decimals of asset.
-   * @throws {InvalidABIError} If the ABI is invalid or the method does not conform to the ABI.
    * @throws {ABIReadError} If there was error while simulating a transaction to read.
+   * @throws {InvalidABIError} If the application didn't return any results.
    * @public
    */
   public async decimals(): Promise<bigint> {
@@ -236,8 +246,8 @@ export default class ARC0200Asset extends BaseApplication {
   /**
    * Gets the name of the asset.
    * @returns {Promise<string>} A promise that resolves to the name of the asset.
-   * @throws {InvalidABIError} If the ABI is invalid or the method does not conform to the ABI.
    * @throws {ABIReadError} If there was error while simulating a transaction to read.
+   * @throws {InvalidABIError} If the application didn't return any results.
    * @public
    */
   public async name(): Promise<string> {
@@ -266,8 +276,8 @@ export default class ARC0200Asset extends BaseApplication {
   /**
    * Gets the symbol of the asset.
    * @returns {Promise<string>} A promise that resolves to the symbol of the asset.
-   * @throws {InvalidABIError} If the ABI is invalid or the method does not conform to the ABI.
    * @throws {ABIReadError} If there was error while simulating a transaction to read.
+   * @throws {InvalidABIError} If the application didn't return any results.
    * @public
    */
   public async symbol(): Promise<string> {
@@ -296,8 +306,8 @@ export default class ARC0200Asset extends BaseApplication {
   /**
    * Gets the total supply of the asset.
    * @returns {bigint} A promise that resolves to the total supply of the asset.
-   * @throws {InvalidABIError} If the ABI is invalid or the method does not conform to the ABI.
    * @throws {ABIReadError} If there was error while simulating a transaction to read.
+   * @throws {InvalidABIError} If the application didn't return any results.
    * @public
    */
   public async totalSupply(): Promise<bigint> {
@@ -331,9 +341,10 @@ export default class ARC0200Asset extends BaseApplication {
    * transaction will be a payment transaction to pay for the box storage for the receiver account. The last transaction
    * will be the application call to transfer the assets.
    * @throws {InsufficientBalanceError} If the sender is attempting to send more than their balance.
-   * @throws {InvalidABIError} If the ABI is invalid or the method does not conform to the ABI.
+   * @throws {InvalidABIError} If the application didn't return any results from the balance operation.
    * @throws {InvalidBoxReferenceError} If the box reference for the sender and receiver could not be determined.
    * @throws {SigningError} If there was an issue signing the transaction(s).
+   * @throws {SendTransactionError} If the transaction(s) failed to be accepted by the network.
    * @public
    */
   public async transfer({ privateKey, ...transactionParams }: TransferParameters): Promise<[string, ...string[]]> {
