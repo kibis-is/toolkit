@@ -5,6 +5,8 @@
  * @property {string} note - [optional] A note that will appear on the application call transfer transaction.
  * @property {string} receiver - The address of the account that will receive the asset.
  * @property {string} sender - The address of the account that will send the asset.
+ * @property {Uint8Array} signer - The private key of the signer. This **SHOULD** be the private key of the sender, but
+ * if the authAddress is provided, this **MUST** be the private key of the authorized address.
  */
 interface TransferParameters {
   amount: bigint;
@@ -12,7 +14,7 @@ interface TransferParameters {
   note?: string;
   receiver: string;
   sender: string;
-  privateKey: Uint8Array;
+  signer: Uint8Array;
 }
 
 export default TransferParameters;

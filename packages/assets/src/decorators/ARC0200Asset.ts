@@ -1,14 +1,23 @@
+import { defaultNode } from '@kibisis/chains';
+import { createLogger } from '@kibisis/utilities';
+import { decode as decodeBase64 } from '@stablelib/base64';
 import { encode as encodeUTF8 } from '@stablelib/utf8';
 import algosdk from 'algosdk';
+import { sign, type SignKeyPair } from 'tweetnacl';
 
 // abis
 import abi from '@/abis/arc0200.abi.json';
+
+// artifacts
+import approvalProgram from '@/artifacts/arc-0200/approval.teal?raw';
+import clearProgram from '@/artifacts/arc-0200/clear.teal?raw';
 
 // contracts
 import BaseApplication from './BaseApplication';
 
 // errors
 import {
+  FailedToCompileError,
   InvalidABIError,
   InvalidBoxReferenceError,
   InsufficientBalanceError,
@@ -17,7 +26,7 @@ import {
 } from '@/errors';
 
 // types
-import type { AllowanceParameters, BaseApplicationParameters, TransferParameters } from '@/types';
+import type { AllowanceParameters, CreateParameters, InitializeParameters, TransferParameters } from '@/types';
 
 // utilities
 import { calculateMBRForBox, trimNullBytes } from '@/utilities';
@@ -26,23 +35,119 @@ export default class ARC0200Asset extends BaseApplication {
   // public static variables
   public static displayName = 'ARC0200Asset';
 
-  private constructor(params: Omit<BaseApplicationParameters, 'abi'>) {
-    super({
-      ...params,
-      abi: new algosdk.ABIContract(abi),
-    });
-  }
-
   /**
    * public static functions
    */
 
   /**
-   * Initializes the asset using the provided application ID and the chain configuration.
-   * @param params
+   *
+   * @param {CreateParameters} params - The chain configuration, the signer, the name, the symbol, the decimals,
+   * the total supply and the debug flag.
+   * @returns {Promise<ARC0200Asset>} A promise that resolves to an instance of the asset.
+   * @throws {FailedToCompileError} If there was an issue compiling the TEAL code.
+   * @throws {SigningError} If there was an issue signing the transaction.
+   * @throws {SendTransactionError} If the create application transaction was rejected by the network or no application
+   * ID was returned from the transaction response.
+   * @public
+   * @static
    */
-  public static initialize(params: Omit<BaseApplicationParameters, 'abi'>): ARC0200Asset {
-    return new ARC0200Asset(params);
+  public static async create({
+    chain,
+    debug = false,
+    decimals,
+    name,
+    signer,
+    symbol,
+    totalSupply,
+  }: CreateParameters): Promise<ARC0200Asset> {
+    const __logPrefix = `${ARC0200Asset.displayName}#create`;
+    const node = defaultNode(chain.algods);
+    const algod = new algosdk.Algodv2(node.token ?? '', node.origin, node.port);
+    const logger = createLogger(debug ? 'debug' : 'error');
+    let compiledApprovalProgramResponse: algosdk.modelsv2.CompileResponse;
+    let compiledClearProgramResponse: algosdk.modelsv2.CompileResponse;
+    let keyPair: SignKeyPair;
+    let signedTransaction: Uint8Array;
+    let transaction: algosdk.Transaction;
+    let transactionResponse: algosdk.modelsv2.PendingTransactionResponse;
+
+    try {
+      compiledApprovalProgramResponse = await algod.compile(approvalProgram).do();
+      compiledClearProgramResponse = await algod.compile(clearProgram).do();
+    } catch (error) {
+      logger.error(`${__logPrefix}:`, error);
+
+      throw new FailedToCompileError('failed to compile the teal code');
+    }
+
+    keyPair = sign.keyPair.fromSeed(signer);
+    transaction = algosdk.makeApplicationCreateTxnFromObject({
+      approvalProgram: decodeBase64(compiledApprovalProgramResponse.result),
+      appArgs: [
+        encodeUTF8(name),
+        encodeUTF8(symbol),
+        algosdk.bigIntToBytes(decimals, 1), // uint8
+        algosdk.bigIntToBytes(totalSupply, 32), // uint256
+      ],
+      clearProgram: decodeBase64(compiledClearProgramResponse.result),
+      extraPages: 1, // required for box storage used by balances/approvals
+      numGlobalByteSlices: 3, // name, symbol, totalSupply
+      numGlobalInts: 1, // decimals
+      numLocalByteSlices: 0,
+      numLocalInts: 0,
+      onComplete: algosdk.OnApplicationComplete.NoOpOC,
+      sender: new algosdk.Address(keyPair.publicKey),
+      suggestedParams: await algod.getTransactionParams().do(),
+    });
+
+    try {
+      signedTransaction = transaction.signTxn(keyPair.secretKey);
+    } catch (error) {
+      logger.error(`${__logPrefix}:`, error);
+
+      throw new SigningError(`failed to sign create application transaction`);
+    }
+
+    try {
+      await algod.sendRawTransaction(signedTransaction).do();
+
+      transactionResponse = await algosdk.waitForConfirmation(algod, transaction.txID(), 4);
+    } catch (error) {
+      logger.error(`${__logPrefix}:`, error);
+
+      throw new SendTransactionError(`failed to send transaction`);
+    }
+
+    if (!transactionResponse.applicationIndex) {
+      throw new SendTransactionError(`no application index returned from transaction response`);
+    }
+
+    return new ARC0200Asset({
+      abi: new algosdk.ABIContract(abi),
+      appID: transactionResponse.applicationIndex,
+      approvalProgram: encodeUTF8(approvalProgram),
+      chain,
+      clearProgram: encodeUTF8(clearProgram),
+      logger,
+    });
+  }
+
+  /**
+   * Initializes the asset using the provided application ID and the chain configuration.
+   * @param {InitializeParameters} params - The application ID, chain configuration and debug flag.
+   * @returns {ARC0200Asset} An instance of the asset.
+   * @public
+   * @static
+   */
+  public static initialize({ appID, chain, debug = false }: InitializeParameters): ARC0200Asset {
+    return new ARC0200Asset({
+      abi: new algosdk.ABIContract(abi),
+      appID,
+      approvalProgram: encodeUTF8(approvalProgram),
+      chain,
+      clearProgram: encodeUTF8(clearProgram),
+      logger: createLogger(debug ? 'debug' : 'error'),
+    });
   }
 
   /**
@@ -136,7 +241,7 @@ export default class ARC0200Asset extends BaseApplication {
     note,
     receiver,
     sender,
-  }: Omit<TransferParameters, 'privateKey'>): Promise<algosdk.Transaction[]> {
+  }: Omit<TransferParameters, 'signer'>): Promise<algosdk.Transaction[]> {
     const __logPrefix = `${ARC0200Asset.displayName}#buildTransferTransactions`;
     let abiMethod: algosdk.ABIMethod;
     let args: Uint8Array[];
@@ -347,10 +452,11 @@ export default class ARC0200Asset extends BaseApplication {
    * @throws {SendTransactionError} If the transaction(s) failed to be accepted by the network.
    * @public
    */
-  public async transfer({ privateKey, ...transactionParams }: TransferParameters): Promise<[string, ...string[]]> {
+  public async transfer({ signer, ...transactionParams }: TransferParameters): Promise<[string, ...string[]]> {
     const __logPrefix = `${ARC0200Asset.displayName}#transfer`;
     const balance = await this.balanceOf(transactionParams.sender);
     const transactions: algosdk.Transaction[] = await this.buildTransferTransactions(transactionParams);
+    let keyPair: SignKeyPair;
     let signedTransactions: Uint8Array[];
 
     if (balance < transactionParams.amount) {
@@ -360,7 +466,8 @@ export default class ARC0200Asset extends BaseApplication {
     }
 
     try {
-      signedTransactions = transactions.map((transaction) => transaction.signTxn(privateKey));
+      keyPair = sign.keyPair.fromSeed(signer);
+      signedTransactions = transactions.map((transaction) => transaction.signTxn(keyPair.secretKey));
     } catch (error) {
       this._logger.error(`${__logPrefix}:`, error);
 

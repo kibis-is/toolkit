@@ -1,23 +1,28 @@
-import { type Chain, type ChainWithNetworkParameters, networkParametersFromChain, VOI_ICON_URI } from '@kibisis/chains';
+import { AlgorandClient } from '@algorandfoundation/algokit-utils';
+import {
+  type Chain,
+  type ChainWithNetworkParameters,
+  defaultNode,
+  networkParametersFromChain,
+  VOI_ICON_URI,
+} from '@kibisis/chains';
 import algosdk from 'algosdk';
-import { beforeAll, beforeEach, describe } from 'vitest';
+import { sign } from 'tweetnacl';
+import { beforeAll, beforeEach, describe, expect, test } from 'vitest';
 
 // decorators
 import ARC0200Asset from './ARC0200Asset';
 
-describe(`${__dirname}#ARC0200Asset`, () => {
+describe(`${__dirname}#${ARC0200Asset.displayName}`, () => {
   const decimals = BigInt(6);
   const name = 'Kibisis Token';
   const symbol = 'KIBI';
   const totalSupply = BigInt('10000000000000000');
   let app: ARC0200Asset;
   let chain: ChainWithNetworkParameters;
+  let deployerPrivateKey: Uint8Array;
 
   beforeAll(async () => {
-    const response = await fetch('http://127.0.0.1:4001/genesis');
-
-    const genesis = await response.json();
-
     const _chain: Chain = {
       algods: {
         default: 0,
@@ -53,28 +58,43 @@ describe(`${__dirname}#ARC0200Asset`, () => {
       },
     };
 
-    try {
-      chain = await networkParametersFromChain(_chain);
-    } catch (error) {
-      console.log('error:', error);
-    }
-
-    console.log('chain:', chain);
+    chain = await networkParametersFromChain(_chain);
   });
 
-  beforeEach(() => {});
+  beforeEach(async () => {
+    const { origin, port, token } = defaultNode(chain.algods);
+    const client = AlgorandClient.fromConfig({
+      algodConfig: {
+        port,
+        server: origin,
+        token,
+      },
+    });
+    const { account } = await client.account.localNetDispenser();
 
-  // describe('when getting the balanceOf', () => {
-  //   it('should return 0 for a new account', async () => {
-  //     // arrange
-  //     const account: Account = generateAccount();
-  //     // act
-  //     const result: BigNumber = await contract.balanceOf(account.addr);
-  //
-  //     // assert
-  //     expect(result.toNumber()).toBe(0);
-  //   });
-  // });
+    deployerPrivateKey = account.sk.slice(0, sign.seedLength); // get the private key from the secret key
+    app = await ARC0200Asset.create({
+      chain,
+      decimals,
+      debug: true,
+      name,
+      symbol,
+      signer: deployerPrivateKey,
+      totalSupply,
+    });
+  });
+
+  describe('when getting the balanceOf', () => {
+    test('should return 0 for a new account', async () => {
+      // arrange
+      const account = algosdk.generateAccount();
+      // act
+      const result = await app.balanceOf(account.addr.toString());
+
+      // assert
+      expect(result).toBe(BigInt(0));
+    });
+  });
 
   // describe('when getting the decimals', () => {
   //   it('should return the decimals', async () => {

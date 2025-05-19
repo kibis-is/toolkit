@@ -1,6 +1,8 @@
 // abi
 export const ABI_READ_ERROR = 'ABI_READ_ERROR';
 export const INVALID_ABI_ERROR = 'INVALID_ABI_ERROR';
+// applications
+export const FAILED_TO_COMPILE_ERROR = 'FAILED_TO_COMPILE_ERROR';
 // assets
 export const INSUFFICIENT_BALANCE_ERROR = 'INSUFFICIENT_BALANCE_ERROR';
 // storage

@@ -23,6 +23,7 @@
     "test": "vitest run --config vitest.config.ts"
   },
   "devDependencies": {
+    "@algorandfoundation/algokit-utils": "catalog:",
     "@eslint/js": "catalog:",
     "@types/node": "catalog:",
     "algosdk": "^3.x",
@@ -48,6 +49,7 @@
     "@kibisis/utilities": "workspace:",
     "@stablelib/base64": "catalog:",
     "@stablelib/utf8": "catalog:",
-    "buffer": "^6.0.3"
+    "buffer": "^6.0.3",
+    "tweetnacl": "^1.0.3"
   }
 }

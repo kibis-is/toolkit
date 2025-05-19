@@ -1,5 +1,5 @@
 import { type ChainWithNetworkParameters, defaultNode } from '@kibisis/chains';
-import { createLogger, type ILogger } from '@kibisis/utilities';
+import { type ILogger } from '@kibisis/utilities';
 import { decode as decodeUTF8 } from '@stablelib/utf8';
 import algosdk from 'algosdk';
 
@@ -29,14 +29,14 @@ export default class BaseApplication {
   protected _chain: ChainWithNetworkParameters;
   protected readonly _logger: ILogger;
 
-  protected constructor({ abi, appID, chain, debug = false }: BaseApplicationParameters) {
+  protected constructor({ abi, appID, chain, logger }: BaseApplicationParameters) {
     const algod = defaultNode(chain.algods);
 
     this._abi = abi;
     this._algod = new algosdk.Algodv2(algod.token ?? '', algod.origin, algod.port);
     this._appID = appID;
     this._chain = chain;
-    this._logger = createLogger(debug ? 'debug' : 'error');
+    this._logger = logger;
   }
 
   /**
