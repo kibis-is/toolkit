@@ -1,4 +1,4 @@
-import { Heading as ChakraHeading, HeadingProps } from '@chakra-ui/react';
+import { Heading as ChakraHeading } from '@chakra-ui/react';
 import {
   type PropsWithoutRef,
   type ForwardRefExoticComponent,
@@ -10,11 +10,11 @@ import {
 import { useDefaultTextColor } from '@/hooks';
 
 // types
-import type { IBaseComponentProps } from '@/types';
+import type { THeadingProps } from '@/types';
 
 const Heading: ForwardRefExoticComponent<
-  PropsWithoutRef<IBaseComponentProps & HeadingProps> & RefAttributes<HTMLHeadingElement>
-> = forwardRef<HTMLHeadingElement, IBaseComponentProps & HeadingProps>(
+  PropsWithoutRef<THeadingProps> & RefAttributes<HTMLHeadingElement>
+> = forwardRef<HTMLHeadingElement, THeadingProps>(
   ({ colorMode, ...otherProps }, ref) => {
     // hooks
     const defaultTextColor = useDefaultTextColor(colorMode);

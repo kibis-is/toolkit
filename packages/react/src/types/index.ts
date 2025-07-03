@@ -5,3 +5,4 @@ export * from './forms';
 export * from './layouts';
 export * from './loaders';
 export * from './strings';
+export * from './typography';

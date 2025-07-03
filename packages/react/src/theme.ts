@@ -166,16 +166,16 @@ export default createSystem(
             800: { value: '#520159' },
             900: { value: '#3D0143' },
           },
-          fonts: {
-            heading: {
-              value: '"Nunito", sans-serif',
-            },
-            body: {
-              value: '"Nunito", sans-serif',
-            },
-            mono: {
-              value: '"SourceCodePro", monospace',
-            },
+        },
+        fonts: {
+          heading: {
+            value: '"Nunito", sans-serif',
+          },
+          body: {
+            value: '"Nunito", sans-serif',
+          },
+          mono: {
+            value: '"SourceCodePro", monospace',
           },
         },
       },

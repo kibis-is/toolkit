@@ -1,4 +1,4 @@
-import { Text as ChakraText, TextProps } from '@chakra-ui/react';
+import { Text as ChakraText } from '@chakra-ui/react';
 import {
   type PropsWithoutRef,
   type ForwardRefExoticComponent,
@@ -10,11 +10,11 @@ import {
 import { useDefaultTextColor } from '@/hooks';
 
 // types
-import type { IBaseComponentProps } from '@/types';
+import type { TTextProps } from '@/types';
 
 const Text: ForwardRefExoticComponent<
-  PropsWithoutRef<IBaseComponentProps & TextProps> & RefAttributes<HTMLParagraphElement>
-> = forwardRef<HTMLParagraphElement, IBaseComponentProps & TextProps>(
+  PropsWithoutRef<TTextProps> & RefAttributes<HTMLParagraphElement>
+> = forwardRef<HTMLParagraphElement, TTextProps>(
   ({ colorMode, ...otherProps }, ref) => {
     // hooks
     const defaultTextColor = useDefaultTextColor(colorMode);

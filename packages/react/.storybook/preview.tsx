@@ -2,6 +2,9 @@ import { ArgTypes, Description, Title } from '@storybook/addon-docs';
 import type { Preview } from '@storybook/react';
 import { useEffect } from 'react';
 
+// styles
+import './styles/index.css';
+
 // theme
 import theme from '@/theme';
 
