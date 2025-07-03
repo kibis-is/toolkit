@@ -31,7 +31,7 @@ const AccountSelect: FC<TAccountSelectProps> = ({
   selectModalTitle,
   value,
 }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('kibisis_react');
   // hooks
   const borderColor = useBorderColor();
   const buttonHoverBackgroundColor = useButtonHoverBackgroundColor();
@@ -93,7 +93,7 @@ const AccountSelect: FC<TAccountSelectProps> = ({
               <AccountItem account={value} colorMode={colorMode} />
             ) : (
               <Text color={defaultTextColor} flexGrow={1} fontSize="sm" textAlign="left">
-                {t('kibisis_react.placeholders.selectAnAccount')}
+                {t('placeholders.selectAnAccount')}
               </Text>
             )}
 
