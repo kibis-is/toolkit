@@ -40,8 +40,8 @@ const meta: Meta<typeof AccountSelect> = {
   component: AccountSelect,
   decorators: [
     (Story, parameters) => {
-      const [account, setAccount] = useState<IAccount>(parameters.args.accounts[0]);
-      console.log(account);
+      // const [account, setAccount] = useState<IAccount>(parameters.args.accounts[0]);
+      // console.log(account);
 
       return <Story />;
     },
