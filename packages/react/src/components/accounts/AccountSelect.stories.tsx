@@ -51,7 +51,7 @@ export const WithDarkTheme: StoryObj<TAccountSelectProps> = {
     theme: 'dark',
   },
   render: (props) => (
-    <KibisisAppProvider colorMode="dark" debug={true}>
+    <KibisisAppProvider colorMode="dark">
       <AccountSelect {...props} />
     </KibisisAppProvider>
   ),

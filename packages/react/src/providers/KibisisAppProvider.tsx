@@ -42,10 +42,16 @@ const KibisisAppProvider: FC<PropsWithChildren<IKibisisAppProviderProps>> = ({ c
       await _i18n.init({
         fallbackLng: 'en',
         debug,
+        defaultNS: ['default'],
         interpolation: {
           escapeValue: false,
         },
-        resources: translations,
+        resources: Object.entries(translations || {}).reduce((acc, [language, resource]) => ({
+          ...acc,
+          [language]: {
+            default: resource,
+          }
+        }), {}),
       });
 
       _i18n.addResourceBundle('en', 'kibisis_react', en, true);
