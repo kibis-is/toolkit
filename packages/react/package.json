@@ -5,7 +5,7 @@
   "description": "React UI components used in the Kibisis apps.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/kibis-is/tollkit"
+    "url": "https://github.com/kibis-is/toolkit"
   },
   "license": "CC0-1.0",
   "type": "module",
