@@ -33,6 +33,8 @@ jobs:
     with:
       package_dir: "icons"
       package_name: "@kibisis/icons"
+    secrets:
+      NPM_TOKEN: ${{ secrets.NPM_PUBLISH_PACKAGES_ACCESS_TOKEN }}
 
   release_utilities:
     name: "Release - @kibisis/utilities"
