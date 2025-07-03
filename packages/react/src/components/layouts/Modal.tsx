@@ -10,13 +10,14 @@ import { IoClose } from 'react-icons/io5';
 import { IconButton } from '@/components';
 
 // hooks
-import { useDesktopAndUp, useTabletAndUp } from '@/hooks';
+import { useBackgroundColor, useDesktopAndUp, useTabletAndUp } from '@/hooks';
 
 // types
 import type { TModalProps } from '@/types';
 
-const Modal: FC<TModalProps> = ({ body, closeButton, colorMode = 'dark', footer, header, onClose, open }) => {
+const Modal: FC<TModalProps> = ({ body, closeButton, closeOnEscape, closeOnInteractOutside, colorMode, footer, header, onClose, open }) => {
   // hooks
+  const backgroundColor = useBackgroundColor(colorMode);
   const isDesktopAndUp = useDesktopAndUp();
   const isTabletAndUp = useTabletAndUp();
   // memos
@@ -26,7 +27,7 @@ const Modal: FC<TModalProps> = ({ body, closeButton, colorMode = 'dark', footer,
     }
 
     if (isTabletAndUp) {
-      return 'full';
+      return 'lg';
     }
 
     return 'full';
@@ -40,6 +41,8 @@ const Modal: FC<TModalProps> = ({ body, closeButton, colorMode = 'dark', footer,
 
   return (
     <Dialog.Root
+      closeOnEscape={closeOnEscape}
+      closeOnInteractOutside={closeOnInteractOutside}
       lazyMount={true}
       motionPreset="slide-in-bottom"
       open={open}
@@ -52,7 +55,7 @@ const Modal: FC<TModalProps> = ({ body, closeButton, colorMode = 'dark', footer,
         <Dialog.Backdrop />
 
         <Dialog.Positioner>
-          <Dialog.Content>
+          <Dialog.Content bg={backgroundColor}>
             {/*header*/}
             <Dialog.Header>
               {header}
@@ -80,5 +83,7 @@ const Modal: FC<TModalProps> = ({ body, closeButton, colorMode = 'dark', footer,
     </Dialog.Root>
   );
 };
+
+Modal.displayName = 'Modal';
 
 export default Modal;

@@ -43,10 +43,10 @@ const AccountSelectModal: FC<TAccountSelectModalProps> = ({
   const { t } = useTranslation();
   // hooks
   const backgroundColor = useBackgroundColor(colorMode);
-  const buttonHoverBackgroundColor = useButtonHoverBackgroundColor();
-  const defaultTextColor = useDefaultTextColor();
-  const primaryColorPalette = usePrimaryColorPalette();
-  const subTextColor = useSubTextColor();
+  const buttonHoverBackgroundColor = useButtonHoverBackgroundColor(colorMode);
+  const defaultTextColor = useDefaultTextColor(colorMode);
+  const primaryColorPalette = usePrimaryColorPalette(colorMode);
+  const subTextColor = useSubTextColor(colorMode);
   // memo
   const context = useMemo(() => randomString(8), []);
   // states
