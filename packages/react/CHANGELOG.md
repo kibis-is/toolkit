@@ -1,3 +1,10 @@
+# [@kibisis/react-v1.3.1](https://github.com/kibis-is/toolkit/compare/@kibisis/react-v1.3.0...@kibisis/react-v1.3.1) (2025-07-03)
+
+
+### Bug Fixes
+
+* **@kibisis/react:** external translations not loading ([#10](https://github.com/kibis-is/toolkit/issues/10)) ([4e44b11](https://github.com/kibis-is/toolkit/commit/4e44b11fd048cffe010fc71edc0ebf8f7a346414))
+
 # [@kibisis/react-v1.3.0](https://github.com/kibis-is/toolkit/compare/@kibisis/react-v1.2.0...@kibisis/react-v1.3.0) (2025-07-03)
 
 
