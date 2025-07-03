@@ -159,7 +159,7 @@ const AccountSelectModal: FC<TAccountSelectModalProps> = ({
           <EmptyState
             colorMode={colorMode}
             icon={IoSearchOutline}
-            title={t('headings.noAccountsFound')}
+            title={t('kibisis_react.headings.noAccountsFound')}
           />
 
           <Spacer />
@@ -240,7 +240,7 @@ const AccountSelectModal: FC<TAccountSelectModalProps> = ({
       footer={(
         <HStack gap={DEFAULT_GAP - 2} w="full">
           <Button colorMode={colorMode} onClick={handleCancelClick} size="lg" variant="outline" w="full">
-            {t('buttons.cancel')}
+            {t('kibisis_react.buttons.cancel')}
           </Button>
 
           {multiple && (
@@ -251,7 +251,7 @@ const AccountSelectModal: FC<TAccountSelectModalProps> = ({
               variant="solid"
               w="full"
             >
-              {t('buttons.confirm')}
+              {t('kibisis_react.buttons.confirm')}
               <Icon as={IoCheckmarkOutline} color={defaultTextColor} h={_iconSize} w={_iconSize} />
             </Button>
           )}
@@ -261,7 +261,7 @@ const AccountSelectModal: FC<TAccountSelectModalProps> = ({
         <VStack gap={DEFAULT_GAP - 2} p={DEFAULT_GAP} w="full">
           {/*heading*/}
           <Heading color={defaultTextColor} size="md" textAlign="center" w="full">
-            {title || t(multiple ? 'headings.selectAccounts' : 'headings.selectAccount')}
+            {title || t(multiple ? 'kibisis_react.headings.selectAccounts' : 'kibisis_react.headings.selectAccount')}
           </Heading>
 
           {/*select all accounts*/}

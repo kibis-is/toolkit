@@ -7,6 +7,7 @@ interface IKibisisAppProviderProps {
   colorMode?: ColorMode;
   debug?: boolean;
   logger?: ILogger;
+  translations?: Record<string, unknown>;
 }
 
 export default IKibisisAppProviderProps;
