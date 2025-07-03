@@ -88,7 +88,7 @@ export default createSystem(
               value: '{colors.primaryDark.500}', // main button bg
             },
             subtle: {
-              value: '{colors.primaryDark.200}', // subtle bg
+              value: '{colors.primaryDark.500}', // subtle bg
             },
           },
           primaryLight: {
@@ -99,19 +99,19 @@ export default createSystem(
               value: '{colors.primaryLight.700}',
             },
             fg: {
-              value: '{colors.primaryLight.100}',
+              value: '{colors.primaryLight.500}',
             },
             focusRing: {
               value: '{colors.primaryLight.500}',
             },
             muted: {
-              value: '{colors.primaryLight.100}',
+              value: '{colors.primaryLight.500}',
             },
             solid: {
               value: '{colors.primaryLight.500}',
             },
             subtle: {
-              value: '{colors.primaryLight.200}',
+              value: '{colors.primaryLight.500}',
             },
           },
         },
