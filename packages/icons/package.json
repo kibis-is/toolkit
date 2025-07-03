@@ -1,0 +1,44 @@
+{
+  "name": "@kibisis/icons",
+  "version": "1.0.0",
+  "private": false,
+  "description": "Icons used in Kibisis apps.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kibis-is/toolkit"
+  },
+  "license": "CC0-1.0",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "vite build",
+    "build:dependencies": "exit 0",
+    "generate:index": "tsx ./scripts/generate-index.ts",
+    "lint": "eslint .",
+    "prettier": "prettier --write \"**/*.{js,json,ts}\"",
+    "test": "exit 0"
+  },
+  "dependencies": {
+    "react-icons": "catalog:"
+  },
+  "devDependencies": {
+    "@eslint/js": "catalog:",
+    "@types/node": "catalog:",
+    "chalk": "catalog:",
+    "eslint": "catalog:",
+    "eslint-config-prettier": "catalog:",
+    "globals": "catalog:",
+    "prettier": "catalog:",
+    "shx": "catalog:",
+    "tsx": "catalog:",
+    "typescript": "catalog:",
+    "typescript-eslint": "catalog:",
+    "vite": "catalog:",
+    "vite-plugin-dts": "catalog:",
+    "vite-tsconfig-paths": "catalog:"
+  }
+}

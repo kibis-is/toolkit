@@ -26,9 +26,19 @@ jobs:
     secrets:
       NPM_TOKEN: ${{ secrets.NPM_PUBLISH_PACKAGES_ACCESS_TOKEN }}
 
+  release_icons:
+    name: "Release - @kibisis/icons"
+    needs: [release_chains]
+    uses: ./.github/workflows/publish_release.yml
+    with:
+      package_dir: "icons"
+      package_name: "@kibisis/icons"
+    secrets:
+      NPM_TOKEN: ${{ secrets.NPM_PUBLISH_PACKAGES_ACCESS_TOKEN }}
+
   release_utilities:
     name: "Release - @kibisis/utilities"
-    needs: [release_chains]
+    needs: [release_chains, release_icons]
     uses: ./.github/workflows/publish_release.yml
     with:
       package_dir: "utilities"
@@ -36,10 +46,21 @@ jobs:
     secrets:
       NPM_TOKEN: ${{ secrets.NPM_PUBLISH_PACKAGES_ACCESS_TOKEN }}
 
+  # **MUST** come after [@kibisis/icons, @kibisis/utilities] as it uses them as dependencies
+  release_react:
+    name: "Release - @kibisis/react"
+    needs: [release_chains, release_icons, release_utilities]
+    uses: ./.github/workflows/publish_release.yml
+    with:
+      package_dir: "react"
+      package_name: "@kibisis/react"
+    secrets:
+      NPM_TOKEN: ${{ secrets.NPM_PUBLISH_PACKAGES_ACCESS_TOKEN }}
+
   # **MUST** come after [release_chains, release_utilities] as it uses them as dependencies
   release_assets:
     name: "Release - @kibisis/assets"
-    needs: [release_chains, release_utilities]
+    needs: [release_chains, release_icons, release_utilities, release_react]
     uses: ./.github/workflows/publish_release.yml
     with:
       package_dir: "assets"

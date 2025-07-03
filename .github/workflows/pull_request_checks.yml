@@ -12,6 +12,8 @@ jobs:
     outputs:
       assets: ${{ steps.filter.outputs.assets }}
       chains: ${{ steps.filter.outputs.chains }}
+      icons: ${{ steps.filter.outputs.icons }}
+      react: ${{ steps.filter.outputs.react }}
       utilities: ${{ steps.filter.outputs.utilities }}
     steps:
       - name: "📥 Filter"
@@ -23,6 +25,10 @@ jobs:
               - 'packages/assets/**'
             chains:
               - 'packages/chains/**'
+            icons:
+              - 'packages/icons/**'
+            react:
+              - 'packages/react/**'
             utilities:
               - 'packages/utilities/**'
 
@@ -70,6 +76,22 @@ jobs:
     with:
       package_name: "@kibisis/chains"
       with_network: false
+
+  lint_build_test_icons:
+    name: "Lint, Build & Test - @kibisis/icons"
+    needs: [changed_files, validate_pr_title]
+    if: ${{ needs.changed_files.outputs.icons == 'true' }}
+    uses: ./.github/workflows/lint_build_test.yml
+    with:
+      package_name: "@kibisis/icons"
+
+  lint_build_test_react:
+    name: "Lint, Build & Test - @kibisis/react"
+    needs: [changed_files, validate_pr_title]
+    if: ${{ needs.changed_files.outputs.react == 'true' }}
+    uses: ./.github/workflows/lint_build_test.yml
+    with:
+      package_name: "@kibisis/react"
 
   lint_build_test_utilities:
     name: "Lint, Build & Test - @kibisis/utilities"
