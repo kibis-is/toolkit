@@ -1,3 +1,10 @@
+# [@kibisis/react-v1.3.0](https://github.com/kibis-is/toolkit/compare/@kibisis/react-v1.2.0...@kibisis/react-v1.3.0) (2025-07-03)
+
+
+### Features
+
+* **@kibisis/react:** add typography ([#9](https://github.com/kibis-is/toolkit/issues/9)) ([21aef96](https://github.com/kibis-is/toolkit/commit/21aef96512776ae1f7432cdfd15dba3d7ad922de))
+
 # [@kibisis/react-v1.2.0](https://github.com/kibis-is/toolkit/compare/@kibisis/react-v1.1.0...@kibisis/react-v1.2.0) (2025-07-03)
 
 
