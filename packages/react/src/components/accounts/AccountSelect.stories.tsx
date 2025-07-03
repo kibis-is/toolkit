@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { useState } from 'react';
 
 // components
 import AccountSelect from './AccountSelect';
@@ -8,7 +7,7 @@ import AccountSelect from './AccountSelect';
 import { KibisisAppProvider } from '@/providers';
 
 // types
-import type { IAccount, TAccountSelectProps } from '@/types';
+import type { TAccountSelectProps } from '@/types';
 
 const meta: Meta<typeof AccountSelect> = {
   args: {
@@ -39,12 +38,7 @@ const meta: Meta<typeof AccountSelect> = {
   },
   component: AccountSelect,
   decorators: [
-    (Story, parameters) => {
-      // const [account, setAccount] = useState<IAccount>(parameters.args.accounts[0]);
-      // console.log(account);
-
-      return <Story />;
-    },
+    (Story) => <Story />,
   ],
   globals: {
     theme: 'dark',
