@@ -93,7 +93,7 @@ const AccountSelect: FC<TAccountSelectProps> = ({
               <AccountItem account={value} colorMode={colorMode} />
             ) : (
               <Text color={defaultTextColor} flexGrow={1} fontSize="sm" textAlign="left">
-                {t('placeholders.selectAnAccount')}
+                {t('kibisis_react.placeholders.selectAnAccount')}
               </Text>
             )}
 
