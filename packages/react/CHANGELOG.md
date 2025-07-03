@@ -1,3 +1,10 @@
+# [@kibisis/react-v1.2.0](https://github.com/kibis-is/toolkit/compare/@kibisis/react-v1.1.0...@kibisis/react-v1.2.0) (2025-07-03)
+
+
+### Features
+
+* **@kibisis/react:** expose default theme ([#8](https://github.com/kibis-is/toolkit/issues/8)) ([13dcafb](https://github.com/kibis-is/toolkit/commit/13dcafbda91cd38fee2ebc29d93f6c20b61216df))
+
 # [@kibisis/react-v1.1.0](https://github.com/kibis-is/toolkit/compare/@kibisis/react-v1.0.0...@kibisis/react-v1.1.0) (2025-07-03)
 
 
