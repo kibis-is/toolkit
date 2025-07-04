@@ -6,6 +6,8 @@ import type { IBaseComponentProps } from '@/types';
 export interface IModalProps {
   body: ReactNode;
   closeButton?: boolean;
+  closeOnEscape?: boolean;
+  closeOnInteractOutside?: boolean;
   footer?: ReactNode;
   header?: ReactNode;
   onClose?: () => void;

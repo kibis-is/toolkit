@@ -7,7 +7,10 @@ import * as process from 'node:process';
  * Script that creates the index.ts file in the `src/` directory.
  */
 function main(): void {
-  const exports = ['// exports will be generated automatically generated using: npm run generate:index'];
+  const exports = [
+    '// exports will be generated automatically using: pnpm run generate:index',
+    `export { default as defaultTheme } from './theme';`,
+  ];
   const srcDir = 'src';
   let dir: ParsedPath;
   let indexFilePath: string;

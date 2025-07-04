@@ -17,7 +17,7 @@ import { en } from '@/translations';
 // types
 import type { IKibisisAppProviderProps } from '@/types';
 
-const KibisisAppProvider: FC<PropsWithChildren<IKibisisAppProviderProps>> = ({ children, colorMode = 'dark', debug = false, logger }) => {
+const KibisisAppProvider: FC<PropsWithChildren<IKibisisAppProviderProps>> = ({ children, colorMode = 'dark', debug = false, logger, translations }) => {
   // states
   const [_colorMode, setColorMode] = useState<ColorMode>(colorMode);
   const [_logger, setLogger] = useState<ILogger>(logger ?? createLogger(debug ? 'debug' : 'error'));
@@ -42,15 +42,20 @@ const KibisisAppProvider: FC<PropsWithChildren<IKibisisAppProviderProps>> = ({ c
       await _i18n.init({
         fallbackLng: 'en',
         debug,
+        defaultNS: ['default'],
         interpolation: {
           escapeValue: false,
         },
-        resources: {
-          en: {
-            translation: en,
-          },
-        },
+        ns: ['default', 'kibisis_react'],
+        resources: Object.entries(translations || {}).reduce((acc, [language, resource]) => ({
+          ...acc,
+          [language]: {
+            default: resource,
+          }
+        }), {}),
       });
+
+      _i18n.addResourceBundle('en', 'kibisis_react', en, true);
 
       setI18n(_i18n);
     })();

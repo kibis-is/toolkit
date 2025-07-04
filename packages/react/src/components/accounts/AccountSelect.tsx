@@ -31,7 +31,7 @@ const AccountSelect: FC<TAccountSelectProps> = ({
   selectModalTitle,
   value,
 }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('kibisis_react');
   // hooks
   const borderColor = useBorderColor();
   const buttonHoverBackgroundColor = useButtonHoverBackgroundColor();

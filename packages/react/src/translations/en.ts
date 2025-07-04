@@ -1,3 +1,5 @@
+import type { ResourceLanguage } from 'i18next';
+
 export default {
   buttons: {
     cancel: 'Cancel',
@@ -15,4 +17,4 @@ export default {
   placeholders: {
     selectAnAccount: 'Select an account',
   },
-} satisfies Record<string, unknown>;
+} satisfies ResourceLanguage;

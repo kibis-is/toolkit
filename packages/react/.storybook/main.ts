@@ -14,6 +14,7 @@ const config: StorybookConfig = {
     name: '@storybook/react-vite',
     options: {},
   },
+  staticDirs: ['./fonts'],
   stories: ['../src/**/*.stories.@(ts|tsx)'],
   viteFinal: (config) =>
     mergeConfig(config, {

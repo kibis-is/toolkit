@@ -3,7 +3,7 @@ import type { ColorMode } from '@chakra-ui/color-mode';
 // hooks
 import { useColorMode } from '@/hooks';
 
-export default function useBorderColor(colorMode?: ColorMode): string {
+export default function useBackgroundColor(colorMode?: ColorMode): string {
   let _colorMode = useColorMode();
 
   if (colorMode) {
@@ -11,8 +11,8 @@ export default function useBorderColor(colorMode?: ColorMode): string {
   }
 
   if (_colorMode === 'dark') {
-    return 'whiteAlpha.400';
+    return 'backgroundDark.500';
   }
 
-  return 'gray.300';
+  return 'backgroundLight.500';
 }

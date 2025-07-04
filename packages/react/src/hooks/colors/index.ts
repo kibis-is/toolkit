@@ -1,4 +1,4 @@
-export { default as useBackgroundColorCode } from './useBackgroundColorCode';
+export { default as useBackgroundColor } from './useBackgroundColor';
 export { default as useBorderColor } from './useBorderColor';
 export { default as useButtonHoverBackgroundColor } from './useButtonHoverBackgroundColor';
 export { default as useColorModeValue } from './useColorModeValue';

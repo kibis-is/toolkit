@@ -22,7 +22,7 @@ import { AccountAvatar, Button, EmptyState, Modal } from '@/components';
 import { DEFAULT_GAP, TAB_ITEM_HEIGHT } from '@/constants';
 
 // hooks
-import { useBackgroundColorCode, useButtonHoverBackgroundColor, useDefaultTextColor, usePrimaryColorPalette, useSubTextColor } from '@/hooks';
+import { useBackgroundColor, useButtonHoverBackgroundColor, useDefaultTextColor, usePrimaryColorPalette, useSubTextColor } from '@/hooks';
 
 // types
 import type { IAccount, TAccountSelectModalProps } from '@/types';
@@ -40,13 +40,13 @@ const AccountSelectModal: FC<TAccountSelectModalProps> = ({
   open,
   title,
 }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('kibisis_react');
   // hooks
-  const backgroundColor = useBackgroundColorCode(colorMode);
-  const buttonHoverBackgroundColor = useButtonHoverBackgroundColor();
-  const defaultTextColor = useDefaultTextColor();
-  const primaryColorPalette = usePrimaryColorPalette();
-  const subTextColor = useSubTextColor();
+  const backgroundColor = useBackgroundColor(colorMode);
+  const buttonHoverBackgroundColor = useButtonHoverBackgroundColor(colorMode);
+  const defaultTextColor = useDefaultTextColor(colorMode);
+  const primaryColorPalette = usePrimaryColorPalette(colorMode);
+  const subTextColor = useSubTextColor(colorMode);
   // memo
   const context = useMemo(() => randomString(8), []);
   // states
