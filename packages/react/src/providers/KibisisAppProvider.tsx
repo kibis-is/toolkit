@@ -46,6 +46,7 @@ const KibisisAppProvider: FC<PropsWithChildren<IKibisisAppProviderProps>> = ({ c
         interpolation: {
           escapeValue: false,
         },
+        ns: ['default', 'kibisis_react'],
         resources: Object.entries(translations || {}).reduce((acc, [language, resource]) => ({
           ...acc,
           [language]: {
