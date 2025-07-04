@@ -5,7 +5,7 @@ import type { IBaseComponentProps } from '@/types';
 
 interface IProps {
   disabled?: boolean;
-  error: string | null;
+  error?: string;
   hint?: string;
   id?: string;
   inputRef?: RefObject<HTMLInputElement | null>;

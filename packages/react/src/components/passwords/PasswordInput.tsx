@@ -41,7 +41,7 @@ const PasswordInput: FC<TPasswordInputProps> = ({
   // memos
   const _id = useMemo(() => id || randomString(6), [id]);
   // callbacks
-  const handleShowHideClick = useCallback(() => setShow(!show), [show, setShow]);
+  const handleOnShowHideClick = useCallback(() => setShow(!show), [show, setShow]);
 
   return (
     <Field.Root invalid={!!error} required={required}>
@@ -61,7 +61,7 @@ const PasswordInput: FC<TPasswordInputProps> = ({
             colorMode={colorMode}
             disabled={disabled}
             icon={show ? IoEye : IoEyeOff}
-            onClick={handleShowHideClick}
+            onClick={handleOnShowHideClick}
           />
         )}
       >
