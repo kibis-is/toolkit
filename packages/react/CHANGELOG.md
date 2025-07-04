@@ -1,3 +1,10 @@
+# [@kibisis/react-v1.4.0](https://github.com/kibis-is/toolkit/compare/@kibisis/react-v1.3.1...@kibisis/react-v1.4.0) (2025-07-04)
+
+
+### Features
+
+* **@kibisis/react:** expose il8n translate function and instance via… ([#11](https://github.com/kibis-is/toolkit/issues/11)) ([0434624](https://github.com/kibis-is/toolkit/commit/04346245062f4039f53c545da51363c6e5e21017))
+
 # [@kibisis/react-v1.3.1](https://github.com/kibis-is/toolkit/compare/@kibisis/react-v1.3.0...@kibisis/react-v1.3.1) (2025-07-03)
 
 
