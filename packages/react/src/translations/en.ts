@@ -11,10 +11,12 @@ export default {
     selectAccounts: 'Select Accounts',
   },
   labels: {
+    password: 'Password',
     selectAccount: 'Select Account',
     selectAllAccounts: 'Select All Accounts',
   },
   placeholders: {
+    enterPassword: 'Enter password',
     selectAnAccount: 'Select an account',
   },
 } satisfies ResourceLanguage;
