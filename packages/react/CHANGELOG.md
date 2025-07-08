@@ -1,3 +1,10 @@
+# [@kibisis/react-v1.5.0](https://github.com/kibis-is/toolkit/compare/@kibisis/react-v1.4.0...@kibisis/react-v1.5.0) (2025-07-08)
+
+
+### Features
+
+* **@kibisis/react:** password related components ([#12](https://github.com/kibis-is/toolkit/issues/12)) ([9f03104](https://github.com/kibis-is/toolkit/commit/9f031049213e05a61c2c84930f6c5aa6f7affa32))
+
 # [@kibisis/react-v1.4.0](https://github.com/kibis-is/toolkit/compare/@kibisis/react-v1.3.1...@kibisis/react-v1.4.0) (2025-07-04)
 
 
