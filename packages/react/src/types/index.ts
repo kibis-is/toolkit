@@ -5,5 +5,6 @@ export * from './forms';
 export * from './il8n';
 export * from './layouts';
 export * from './loaders';
+export * from './passwords';
 export * from './strings';
 export * from './typography';
