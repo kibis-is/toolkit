@@ -1,3 +1,10 @@
+# [@kibisis/react-v1.6.0](https://github.com/kibis-is/toolkit/compare/@kibisis/react-v1.5.0...@kibisis/react-v1.6.0) (2025-07-09)
+
+
+### Features
+
+* **@kibisis/react:** export translate component ([#13](https://github.com/kibis-is/toolkit/issues/13)) ([ef3a44a](https://github.com/kibis-is/toolkit/commit/ef3a44a530cde7f88023e069726aa5f2b531bc41))
+
 # [@kibisis/react-v1.5.0](https://github.com/kibis-is/toolkit/compare/@kibisis/react-v1.4.0...@kibisis/react-v1.5.0) (2025-07-08)
 
 
