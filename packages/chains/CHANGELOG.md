@@ -1,3 +1,10 @@
+# [@kibisis/chains-v1.3.1](https://github.com/kibis-is/toolkit/compare/@kibisis/chains-v1.3.0...@kibisis/chains-v1.3.1) (2025-07-14)
+
+
+### Bug Fixes
+
+* **chains:** exports caip utilities ([47fce26](https://github.com/kibis-is/toolkit/commit/47fce265ce509a80463b7393e30938e4cd268610))
+
 # [@kibisis/chains-v1.3.0](https://github.com/kibis-is/toolkit/compare/@kibisis/chains-v1.2.0...@kibisis/chains-v1.3.0) (2025-07-14)
 
 
