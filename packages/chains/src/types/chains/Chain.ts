@@ -1,21 +1,31 @@
+// enums
+import { CAIP002Namespace } from '@/enums';
+
 // types
-import type { NativeCurrency, NodeCollection } from '@/types';
+import type { AVMNetworkInformation, NativeCurrency } from '@/types';
 
 /**
- * @property {Record<'namespace', string>} caip002 - The CAIP-002 identifier for the family of chains.
- * @property {NodeCollection} algods - A collection of Algod nodes.
  * @property {string} displayName - A human-readable name for the chain.
- * @property {NodeCollection} indexers - [optional] A collection of Indexer nodes.
- * @property {boolean} isTestnet - Whether this chain is considered a testnet.
- * @property {NativeCurrency} nativeCurrency - [optional] Details relating to the native currency of the chain.
+ * @property {string} iconURI - A data URI of the chain that conforms to RFC-2397 or a URL that points to an image. The
+ * **RECOMMENDED** image format should be lossless or vector-based such as a PNG, WebP or SVG.
+ * @property {string} namespace - The CAIP-002 namespace of the chain. It acts as a resolution to the chain's reference.
+ * @property {NativeCurrency} nativeCurrency - Details relating to the native currency of the chain.
+ * @property {string} reference - A unique identifier for the chain within the CAIP-002 namespace.
+ * * `algorand`/`avm`: This is the first 32 characters of the base64 encoded genesis hash.
+ * @property {boolean} testnet - Whether this chain is considered a testnet.
  */
-interface Chain {
-  caip002: Record<'namespace', string>;
-  algods: NodeCollection;
+interface Chain<Namespace = CAIP002Namespace> {
   displayName: string;
-  indexers?: NodeCollection;
-  isTestnet: boolean;
-  nativeCurrency?: NativeCurrency;
+  iconURI: string;
+  namespace: Namespace;
+  nativeCurrency: NativeCurrency;
+  network: Namespace extends CAIP002Namespace.Algorand
+    ? AVMNetworkInformation
+    : Namespace extends CAIP002Namespace.AVM
+      ? AVMNetworkInformation
+      : never;
+  reference: string;
+  testnet: boolean;
 }
 
 export default Chain;
