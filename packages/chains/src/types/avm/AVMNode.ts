@@ -5,7 +5,7 @@
  * @property {string} port - [optional] The port of the node.
  * @property {string} token - [optional] A security token that will be used to authenticate requests.
  */
-interface Node {
+interface AVMNode {
   canonicalName?: string;
   id: string;
   origin: string;
@@ -13,4 +13,4 @@ interface Node {
   token?: string;
 }
 
-export default Node;
+export default AVMNode;

@@ -8,7 +8,7 @@ import { decode as decodeBase64, encodeURLSafe as encodeBase64URL } from '@stabl
  * @returns {string} The AVM genesis hash converted to the CAIP-002 chain reference.
  * @see {@link https://chainagnostic.org/CAIPs/caip-2}
  */
-export default function caip002ReferenceFromGenesisHash(genesisHash: string): string {
+export default function avmGenesisHashToCAIP002Reference(genesisHash: string): string {
   const decodedGenesisHash = decodeBase64(genesisHash);
 
   return encodeBase64URL(decodedGenesisHash).slice(0, 32);

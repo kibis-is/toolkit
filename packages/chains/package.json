@@ -19,7 +19,7 @@
     "build:dependencies": "exit 0",
     "lint": "eslint .",
     "prettier": "prettier --write \"**/*.{cjs,js,json,mjs,ts}\"",
-    "test": "exit 0"
+    "test": "vitest run --config vitest.config.ts"
   },
   "devDependencies": {
     "@eslint/js": "catalog:",
@@ -35,7 +35,8 @@
     "typescript-eslint": "catalog:",
     "vite": "catalog:",
     "vite-plugin-dts": "catalog:",
-    "vite-tsconfig-paths": "catalog:"
+    "vite-tsconfig-paths": "catalog:",
+    "vitest": "catalog:"
   },
   "dependencies": {
     "@stablelib/base64": "catalog:",
