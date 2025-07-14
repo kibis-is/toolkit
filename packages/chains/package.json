@@ -39,7 +39,6 @@
     "vitest": "catalog:"
   },
   "dependencies": {
-    "@stablelib/base64": "catalog:",
-    "axios": "^1.9.0"
+    "@stablelib/base64": "catalog:"
   }
 }
