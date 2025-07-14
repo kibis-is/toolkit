@@ -1,3 +1,10 @@
+# [@kibisis/chains-v1.3.0](https://github.com/kibis-is/toolkit/compare/@kibisis/chains-v1.2.0...@kibisis/chains-v1.3.0) (2025-07-14)
+
+
+### Features
+
+* **chains:** adds utility to generate chain id ([#15](https://github.com/kibis-is/toolkit/issues/15)) ([60779f6](https://github.com/kibis-is/toolkit/commit/60779f65e87c37e2b10751ecfda4d9459f08e8de))
+
 # [@kibisis/chains-v1.2.0](https://github.com/kibis-is/toolkit/compare/@kibisis/chains-v1.1.2...@kibisis/chains-v1.2.0) (2025-07-14)
 
 
