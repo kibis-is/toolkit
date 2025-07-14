@@ -1,3 +1,10 @@
+# [@kibisis/chains-v1.2.0](https://github.com/kibis-is/toolkit/compare/@kibisis/chains-v1.1.2...@kibisis/chains-v1.2.0) (2025-07-14)
+
+
+### Features
+
+* **chains:** creates foundation for multi-chain ([#14](https://github.com/kibis-is/toolkit/issues/14)) ([0a80279](https://github.com/kibis-is/toolkit/commit/0a80279201ba5f7846a23f8e5ef4f2f67189e8fb))
+
 # [@kibisis/chains-v1.1.2](https://github.com/kibis-is/toolkit/compare/@kibisis/chains-v1.1.1...@kibisis/chains-v1.1.2) (2025-05-18)
 
 
