@@ -5,7 +5,7 @@ import axios, { type AxiosRequestConfig } from 'axios';
 import { CAIP002Namespace } from '@/enums';
 
 // decorators
-import Chain from './Chain';
+import AbstractChain from './AbstractChain';
 
 // types
 import type {
@@ -16,7 +16,7 @@ import type {
   AVMTransactionParamsResponse,
 } from '@/types';
 
-export default class AVMChain extends Chain {
+export default class AVMChain extends AbstractChain {
   protected constructor(params: ChainParameters<CAIP002Namespace.Algorand | CAIP002Namespace.AVM>) {
     super(params);
   }
