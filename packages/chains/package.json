@@ -40,6 +40,7 @@
     "vitest": "catalog:"
   },
   "dependencies": {
-    "@kibisis/encoding": "workspace:^"
+    "@kibisis/encoding": "workspace:^",
+    "axios": "^1.10.0"
   }
 }
