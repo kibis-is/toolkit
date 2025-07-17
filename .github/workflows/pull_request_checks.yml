@@ -11,6 +11,7 @@ jobs:
       pull-requests: read
     outputs:
       chains: ${{ steps.filter.outputs.chains }}
+      encoding: ${{ steps.filter.outputs.encoding }}
       icons: ${{ steps.filter.outputs.icons }}
       react: ${{ steps.filter.outputs.react }}
       utilities: ${{ steps.filter.outputs.utilities }}
@@ -22,6 +23,8 @@ jobs:
           filters: |
             chains:
               - 'packages/chains/**'
+            encoding:
+              - 'packages/encoding/**'
             icons:
               - 'packages/icons/**'
             react:
@@ -63,6 +66,14 @@ jobs:
     uses: ./.github/workflows/lint_build_test.yml
     with:
       package_name: "@kibisis/chains"
+
+  encoding:
+    name: "Lint, Build & Test - @kibisis/encoding"
+    needs: [changed_files, validate_pr_title]
+    if: ${{ needs.changed_files.outputs.encoding == 'true' }}
+    uses: ./.github/workflows/lint_build_test.yml
+    with:
+      package_name: "@kibisis/encoding"
 
   lint_build_test_icons:
     name: "Lint, Build & Test - @kibisis/icons"
