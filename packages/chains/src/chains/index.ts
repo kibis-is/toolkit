@@ -1,6 +1,6 @@
-export { default as algorand } from './algorand';
-export { default as algorandBetanet } from './algorandBetanet';
-export { default as algorandTestnet } from './algorandTestnet';
-export { default as fnet } from './fnet';
-export { default as voi } from './voi';
-export { default as voiTestnet } from './voiTestnet';
+export { default as Algorand } from './Algorand';
+export { default as AlgorandBetanet } from './AlgorandBetanet';
+export { default as AlgorandFNet } from './AlgorandFNet';
+export { default as AlgorandTestnet } from './AlgorandTestnet';
+export { default as Voi } from './Voi';
+export { default as VoiTestnet } from './VoiTestnet';
