@@ -1,3 +1,10 @@
+# [@kibisis/chains-v2.1.0](https://github.com/kibis-is/toolkit/compare/@kibisis/chains-v2.0.0...@kibisis/chains-v2.1.0) (2025-07-17)
+
+
+### Features
+
+* **chains:** add union chain types ([#18](https://github.com/kibis-is/toolkit/issues/18)) ([c6bc09a](https://github.com/kibis-is/toolkit/commit/c6bc09a6c06c5ef08ec8c299dbae4d6ea504ca8c))
+
 # [@kibisis/chains-v2.0.0](https://github.com/kibis-is/toolkit/compare/@kibisis/chains-v1.3.1...@kibisis/chains-v2.0.0) (2025-07-17)
 
 
