@@ -1,3 +1,10 @@
+# [@kibisis/chains-v2.2.0](https://github.com/kibis-is/toolkit/compare/@kibisis/chains-v2.1.0...@kibisis/chains-v2.2.0) (2025-07-17)
+
+
+### Features
+
+* **chains:** exposes the static propeties in the instance ([#19](https://github.com/kibis-is/toolkit/issues/19)) ([710eedc](https://github.com/kibis-is/toolkit/commit/710eedcab0e041f781d8f42a4cd2172c11771794))
+
 # [@kibisis/chains-v2.1.0](https://github.com/kibis-is/toolkit/compare/@kibisis/chains-v2.0.0...@kibisis/chains-v2.1.0) (2025-07-17)
 
 
