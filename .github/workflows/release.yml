@@ -17,18 +17,8 @@ permissions:
   pull-requests: write # to be able to comment on released pull requests
 
 jobs:
-  chains:
-    name: "Release - @kibisis/chains"
-    uses: ./.github/workflows/publish_release.yml
-    with:
-      package_dir: "chains"
-      package_name: "@kibisis/chains"
-    secrets:
-      NPM_TOKEN: ${{ secrets.NPM_PUBLISH_PACKAGES_ACCESS_TOKEN }}
-
   encoding:
     name: "Release - @kibisis/encoding"
-    needs: [chains]
     uses: ./.github/workflows/publish_release.yml
     with:
       package_dir: "encoding"
@@ -38,7 +28,7 @@ jobs:
 
   icons:
     name: "Release - @kibisis/icons"
-    needs: [chains, encoding]
+    needs: [encoding]
     uses: ./.github/workflows/publish_release.yml
     with:
       package_dir: "icons"
@@ -48,7 +38,7 @@ jobs:
 
   utilities:
     name: "Release - @kibisis/utilities"
-    needs: [chains, encoding, icons]
+    needs: [encoding, icons]
     uses: ./.github/workflows/publish_release.yml
     with:
       package_dir: "utilities"
@@ -56,10 +46,21 @@ jobs:
     secrets:
       NPM_TOKEN: ${{ secrets.NPM_PUBLISH_PACKAGES_ACCESS_TOKEN }}
 
+  # **MUST** come after [@kibisis/encoding] as it uses them as dependencies
+  chains:
+    name: "Release - @kibisis/chains"
+    needs: [encoding, icons, utilities]
+    uses: ./.github/workflows/publish_release.yml
+    with:
+      package_dir: "chains"
+      package_name: "@kibisis/chains"
+    secrets:
+      NPM_TOKEN: ${{ secrets.NPM_PUBLISH_PACKAGES_ACCESS_TOKEN }}
+
   # **MUST** come after [@kibisis/icons, @kibisis/utilities] as it uses them as dependencies
   react:
     name: "Release - @kibisis/react"
-    needs: [chains, encoding, icons, utilities]
+    needs: [encoding, icons, utilities, chains]
     uses: ./.github/workflows/publish_release.yml
     with:
       package_dir: "react"
