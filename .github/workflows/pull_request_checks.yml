@@ -59,7 +59,7 @@ jobs:
   # package specific
   ##
 
-  lint_build_test_chains:
+  chains:
     name: "Lint, Build & Test - @kibisis/chains"
     needs: [changed_files, validate_pr_title]
     if: ${{ needs.changed_files.outputs.chains == 'true' }}
@@ -75,7 +75,7 @@ jobs:
     with:
       package_name: "@kibisis/encoding"
 
-  lint_build_test_icons:
+  icons:
     name: "Lint, Build & Test - @kibisis/icons"
     needs: [changed_files, validate_pr_title]
     if: ${{ needs.changed_files.outputs.icons == 'true' }}
@@ -83,7 +83,7 @@ jobs:
     with:
       package_name: "@kibisis/icons"
 
-  lint_build_test_react:
+  react:
     name: "Lint, Build & Test - @kibisis/react"
     needs: [changed_files, validate_pr_title]
     if: ${{ needs.changed_files.outputs.react == 'true' }}
@@ -91,7 +91,7 @@ jobs:
     with:
       package_name: "@kibisis/react"
 
-  lint_build_test_utilities:
+  utilities:
     name: "Lint, Build & Test - @kibisis/utilities"
     needs: [changed_files, validate_pr_title]
     if: ${{ needs.changed_files.outputs.utilities == 'true' }}
