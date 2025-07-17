@@ -1,3 +1,15 @@
+# [@kibisis/chains-v2.0.0](https://github.com/kibis-is/toolkit/compare/@kibisis/chains-v1.3.1...@kibisis/chains-v2.0.0) (2025-07-17)
+
+
+### Features
+
+* **chains:** adds network information ([#17](https://github.com/kibis-is/toolkit/issues/17)) ([fc0c78b](https://github.com/kibis-is/toolkit/commit/fc0c78b57cb2a27233e8caaee77ec7e2fd26ea17))
+
+
+### BREAKING CHANGES
+
+* **chains:** chains are exported as classes
+
 # [@kibisis/chains-v1.3.1](https://github.com/kibis-is/toolkit/compare/@kibisis/chains-v1.3.0...@kibisis/chains-v1.3.1) (2025-07-14)
 
 
