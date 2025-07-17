@@ -82,6 +82,29 @@ export default abstract class AbstractChain {
   }
 
   /**
+   * public abstract methods
+   */
+
+  /**
+   * Retrieves the CAIP-002 namespace associated with the current implementation.
+   *
+   * @return {CAIP002Namespace} An instance representing the CAIP-002 namespace.
+   * @public
+   * @abstract
+   */
+  public abstract namespace(): CAIP002Namespace;
+
+  /**
+   * Abstract method to retrieve the network configuration for the specified CAIP-002 namespace.
+   * This method must be implemented to define how network configurations are fetched, created or managed.
+   *
+   * @return {NetworkConfiguration<CAIP002Namespace>} The network configuration associated with the given namespace.
+   * @public
+   * @abstract
+   */
+  public abstract networkConfiguration(): NetworkConfiguration<CAIP002Namespace>;
+
+  /**
    * public methods
    */
 
@@ -94,5 +117,45 @@ export default abstract class AbstractChain {
    */
   public chainID(): string {
     return (this.constructor as typeof AbstractChain).namespace + ':' + this.reference;
+  }
+
+  /**
+   * Retrieves the display name of the chain.
+   *
+   * @return {string} The display name of the chain.
+   * @public
+   */
+  public displayName(): string {
+    return (this.constructor as typeof AbstractChain).displayName;
+  }
+
+  /**
+   * Retrieves the URI of the icon associated with the chain.
+   *
+   * @return {string} The URI of the chain icon.
+   * @public
+   */
+  public iconURI(): string {
+    return (this.constructor as typeof AbstractChain).iconURI;
+  }
+
+  /**
+   * Retrieves the native currency associated with the chain.
+   *
+   * @return {NativeCurrency} The native currency of the chain as an instance of NativeCurrency.
+   * @public
+   */
+  public nativeCurrency(): NativeCurrency {
+    return (this.constructor as typeof AbstractChain).nativeCurrency;
+  }
+
+  /**
+   * Determines whether the current instance is operating on a testnet or not.
+   *
+   * @return {boolean} Returns true if the instance is associated with a testnet, otherwise false.
+   * @public
+   */
+  public testnet(): boolean {
+    return (this.constructor as typeof AbstractChain).testnet;
   }
 }
