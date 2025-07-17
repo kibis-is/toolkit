@@ -9,9 +9,6 @@ catalogs:
     '@eslint/js':
       specifier: ^9.18.0
       version: 9.26.0
-    '@stablelib/base64':
-      specifier: ^2.0.1
-      version: 2.0.1
     '@types/node':
       specifier: ^20.9.0
       version: 20.17.44
@@ -104,9 +101,9 @@ importers:
 
   packages/chains:
     dependencies:
-      '@stablelib/base64':
-        specifier: 'catalog:'
-        version: 2.0.1
+      '@kibisis/encoding':
+        specifier: workspace:^
+        version: link:../encoding
     devDependencies:
       '@eslint/js':
         specifier: 'catalog:'
@@ -1519,9 +1516,6 @@ packages:
   '@sindresorhus/merge-streams@4.0.0':
     resolution: {integrity: sha512-tlqY9xq5ukxTUZBmoOp+m61cqwQD5pHJtFY3Mn8CA8ps6yghLH/Hw8UPdqg4OLmFW3IFlcXnQNmo/dh8HzXYIQ==}
     engines: {node: '>=18'}
-
-  '@stablelib/base64@2.0.1':
-    resolution: {integrity: sha512-P2z89A7N1ETt6RxgpVdDT2xlg8cnm3n6td0lY9gyK7EiWK3wdq388yFX/hLknkCC0we05OZAD1rfxlQJUbl5VQ==}
 
   '@stablelib/binary@2.0.1':
     resolution: {integrity: sha512-U9iAO8lXgEDONsA0zPPSgcf3HUBNAqHiJmSHgZz62OvC3Hi2Bhc5kTnQ3S1/L+sthDTHtCMhcEiklmIly6uQ3w==}
@@ -5952,8 +5946,6 @@ snapshots:
   '@sindresorhus/merge-streams@2.3.0': {}
 
   '@sindresorhus/merge-streams@4.0.0': {}
-
-  '@stablelib/base64@2.0.1': {}
 
   '@stablelib/binary@2.0.1':
     dependencies:
