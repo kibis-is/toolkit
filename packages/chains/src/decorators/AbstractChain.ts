@@ -11,9 +11,14 @@ import type { ChainParameters, NativeCurrency, NetworkConfiguration, NetworkInfo
  *
  * The class supports CAIP-002 (Chain Agnostic Improvement Proposals) for chain identification.
  *
+ * **Implementation Requirements: **
+ * - Subclasses **MUST** implement a static `initialize()` method.
+ * - The method **MUST** return Promise<InstanceOfSubclass>.
+ * - The method should handle all necessary setup and return a ready-to-use instance.
+ *
  * @abstract
  */
-export default abstract class Chain {
+export default abstract class AbstractChain {
   /**
    * public static variables
    */
@@ -88,6 +93,6 @@ export default abstract class Chain {
    * @public
    */
   public chainID(): string {
-    return (this.constructor as typeof Chain).namespace + ':' + this.reference;
+    return (this.constructor as typeof AbstractChain).namespace + ':' + this.reference;
   }
 }
