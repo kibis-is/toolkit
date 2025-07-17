@@ -14,9 +14,16 @@ import type {
   AVMNode,
   AVMNodeCollection,
   AVMTransactionParamsResponse,
+  NetworkConfiguration,
 } from '@/types';
 
 export default class AVMChain extends AbstractChain {
+  /**
+   * public static variables
+   */
+
+  public static readonly namespace: CAIP002Namespace.Algorand | CAIP002Namespace.AVM;
+
   protected constructor(params: ChainParameters<CAIP002Namespace.Algorand | CAIP002Namespace.AVM>) {
     super(params);
   }
@@ -77,5 +84,17 @@ export default class AVMChain extends AbstractChain {
       noPadding: true,
       urlSafe: true,
     });
+  }
+
+  /**
+   * public methods
+   */
+
+  public namespace(): CAIP002Namespace.Algorand | CAIP002Namespace.AVM {
+    return (this.constructor as typeof AVMChain).namespace;
+  }
+
+  public networkConfiguration(): NetworkConfiguration<CAIP002Namespace.Algorand | CAIP002Namespace.AVM> {
+    return (this.constructor as typeof AVMChain).networkConfiguration;
   }
 }
