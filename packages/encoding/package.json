@@ -1,6 +1,6 @@
 {
   "name": "@kibisis/encoding",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": false,
   "description": "Handles the encoding/decoding of data in the following formats: base32, base58, base64, hexadecimal and UTF-8.",
   "repository": {
