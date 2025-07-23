@@ -13,7 +13,7 @@ import type DecodeOptions from './DecodeOptions';
  */
 export default function decode(encoded: string, options?: DecodeOptions): Uint8Array {
   if (options?.ignorePadding) {
-    decodeBase32IgnorePadding(encoded);
+    return decodeBase32IgnorePadding(encoded);
   }
 
   return decodeBase32(encoded);
