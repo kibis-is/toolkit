@@ -14,7 +14,7 @@ import type {
   AVMNode,
   AVMNodeCollection,
   AVMTransactionParamsResponse,
-  NetworkConfiguration,
+  Transports,
 } from '@/types';
 
 export default class AVMChain extends AbstractChain {
@@ -23,6 +23,7 @@ export default class AVMChain extends AbstractChain {
    */
 
   public static readonly namespace: CAIP002Namespace.Algorand | CAIP002Namespace.AVM;
+  public static readonly transports: Transports<CAIP002Namespace.Algorand>;
 
   protected constructor(params: ChainParameters<CAIP002Namespace.Algorand | CAIP002Namespace.AVM>) {
     super(params);
@@ -34,8 +35,11 @@ export default class AVMChain extends AbstractChain {
 
   /**
    * Returns the default node from the provided node collection.
+   *
    * @param {AVMNodeCollection} nodeCollection - The collection of nodes containing a default node identifier.
    * @returns {AVMNode} The default node from the node collection.
+   * @protected
+   * @static
    */
   protected static _defaultNode(nodeCollection: AVMNodeCollection): AVMNode {
     return nodeCollection.nodes[nodeCollection.default];
@@ -46,7 +50,7 @@ export default class AVMChain extends AbstractChain {
    */
 
   public static async initialize<T extends typeof AVMChain>(this: T): Promise<AVMChain> {
-    const algod = this._defaultNode(this.networkConfiguration.algods);
+    const algod = this._defaultNode(this.transports.algods);
     const baseURL = `${algod.origin}${algod.port ? `:${algod.port}` : ''}`;
     const config: AxiosRequestConfig | undefined = algod.token
       ? {
@@ -94,7 +98,7 @@ export default class AVMChain extends AbstractChain {
     return (this.constructor as typeof AVMChain).namespace;
   }
 
-  public networkConfiguration(): NetworkConfiguration<CAIP002Namespace.Algorand | CAIP002Namespace.AVM> {
-    return (this.constructor as typeof AVMChain).networkConfiguration;
+  public transports(): Transports<CAIP002Namespace.Algorand> {
+    return (this.constructor as typeof AVMChain).transports;
   }
 }

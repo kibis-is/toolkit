@@ -104,6 +104,9 @@ importers:
       '@kibisis/encoding':
         specifier: workspace:^
         version: link:../encoding
+      '@stablelib/uuid':
+        specifier: ^2.0.1
+        version: 2.0.1
       axios:
         specifier: ^1.10.0
         version: 1.10.0
