@@ -8,7 +8,7 @@ import { AVMChain } from '@/decorators';
 import { CAIP002Namespace } from '@/enums';
 
 // types
-import type { NetworkConfiguration } from '@/types';
+import type { Transports } from '@/types';
 
 export default class VoiTestnet extends AVMChain {
   // public static variables
@@ -21,7 +21,7 @@ export default class VoiTestnet extends AVMChain {
     name: 'Voi',
     symbol: 'VOI',
   };
-  public static readonly networkConfiguration: NetworkConfiguration<CAIP002Namespace.AVM> = {
+  public static readonly transports: Transports<CAIP002Namespace.AVM> = {
     algods: {
       default: 0,
       nodes: [

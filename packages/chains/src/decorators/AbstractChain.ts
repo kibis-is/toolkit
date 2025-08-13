@@ -2,14 +2,15 @@
 import { CAIP002Namespace } from '@/enums';
 
 // types
-import type { ChainParameters, NativeCurrency, NetworkConfiguration, NetworkInformation } from '@/types';
+import type { ChainParameters, NativeCurrency, NetworkInformation, Transports } from '@/types';
 
 /**
  * Provides a base abstraction for a blockchain chain, containing properties and methods
  * to define and interact with chain-specific information. It is designed as an abstract
  * class and should be extended to represent specific blockchains.
  *
- * The class supports CAIP-002 (Chain Agnostic Improvement Proposals) for chain identification.
+ * The class supports [CAIP-002]{@link https://chainagnostic.org/CAIPs/caip-2} (Chain Agnostic Improvement Proposals)
+ * for chain identification.
  *
  * **Implementation Requirements: **
  * - Subclasses **MUST** implement a static `initialize()` method.
@@ -37,7 +38,8 @@ export default abstract class AbstractChain {
    */
   public static readonly iconURI: string;
   /**
-   * The CAIP-002 namespace of the chain. It acts as a resolution to the chain's reference.
+   * The [CAIP-002]{@link https://chainagnostic.org/CAIPs/caip-2} namespace of the chain. It acts as a resolution to the
+   * chain's reference.
    * @static
    * @readonly
    */
@@ -49,11 +51,11 @@ export default abstract class AbstractChain {
    */
   public static readonly nativeCurrency: NativeCurrency;
   /**
-   * Network configuration containing node information and settings for the chain.
+   * Transport configuration that facilitates communication to the network.
    * @static
    * @readonly
    */
-  public static readonly networkConfiguration: NetworkConfiguration<CAIP002Namespace>;
+  public static readonly transports: Transports<CAIP002Namespace>;
   /**
    * Whether this chain is considered a testnet.
    * @static
@@ -71,7 +73,7 @@ export default abstract class AbstractChain {
    */
   public readonly networkInformation: NetworkInformation<CAIP002Namespace>;
   /**
-   * A unique identifier for the chain within the CAIP-002 namespace.
+   * A unique identifier for the chain within the [CAIP-002]{@link https://chainagnostic.org/CAIPs/caip-2} namespace.
    * @readonly
    */
   public readonly reference: string;
@@ -86,33 +88,36 @@ export default abstract class AbstractChain {
    */
 
   /**
-   * Retrieves the CAIP-002 namespace associated with the current implementation.
+   * Retrieves the [CAIP-002]{@link https://chainagnostic.org/CAIPs/caip-2} namespace associated with the current implementation.
    *
-   * @return {CAIP002Namespace} An instance representing the CAIP-002 namespace.
+   * @return {CAIP002Namespace} An instance representing the [CAIP-002]{@link https://chainagnostic.org/CAIPs/caip-2}
+   * namespace.
    * @public
    * @abstract
    */
   public abstract namespace(): CAIP002Namespace;
 
   /**
-   * Abstract method to retrieve the network configuration for the specified CAIP-002 namespace.
-   * This method must be implemented to define how network configurations are fetched, created or managed.
+   * Gets the transport configuration to communicate with the chain for the specified
+   * [CAIP-002]{@link https://chainagnostic.org/CAIPs/caip-2} namespace.
    *
-   * @return {NetworkConfiguration<CAIP002Namespace>} The network configuration associated with the given namespace.
+   * This method must be implemented to define how the chain is communicated to.
+   *
+   * @return {Transports<CAIP002Namespace>} The transport configuration associated with the given namespace.
    * @public
    * @abstract
    */
-  public abstract networkConfiguration(): NetworkConfiguration<CAIP002Namespace>;
+  public abstract transports(): Transports<CAIP002Namespace>;
 
   /**
    * public methods
    */
 
   /**
-   * Generates the CAIP-002 chain identifier by combining the namespace and reference with a colon.
+   * Generates the [CAIP-002]{@link https://chainagnostic.org/CAIPs/caip-2} chain identifier by combining the namespace
+   * and reference with a colon.
    *
    * @return {string} The CAIP-002 chain identifier as "namespace:reference".
-   * @see {@link https://chainagnostic.org/CAIPs/caip-2}
    * @public
    */
   public chainID(): string {

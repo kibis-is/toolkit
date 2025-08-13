@@ -41,6 +41,7 @@
   },
   "dependencies": {
     "@kibisis/encoding": "workspace:^",
-    "axios": "^1.10.0"
+    "@stablelib/uuid": "^2.0.1",
+    "axios": "^1.11.0"
   }
 }
