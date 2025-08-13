@@ -1,3 +1,10 @@
+# [@kibisis/chains-v2.3.0](https://github.com/kibis-is/toolkit/compare/@kibisis/chains-v2.2.0...@kibisis/chains-v2.3.0) (2025-08-13)
+
+
+### Features
+
+* **chains:** adds ethereum chain ([#22](https://github.com/kibis-is/toolkit/issues/22)) ([7f129e7](https://github.com/kibis-is/toolkit/commit/7f129e72f4d1f8b46ccc2601c2fe3d6ed483478b))
+
 # [@kibisis/chains-v2.2.0](https://github.com/kibis-is/toolkit/compare/@kibisis/chains-v2.1.0...@kibisis/chains-v2.2.0) (2025-07-17)
 
 
