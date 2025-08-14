@@ -1,3 +1,10 @@
+# [@kibisis/chains-v2.4.0](https://github.com/kibis-is/toolkit/compare/@kibisis/chains-v2.3.0...@kibisis/chains-v2.4.0) (2025-08-14)
+
+
+### Features
+
+* **chains:** adds the gnosis and chiados chains ([#23](https://github.com/kibis-is/toolkit/issues/23)) ([7ab4bed](https://github.com/kibis-is/toolkit/commit/7ab4bedcf520756c92c4ea10dfd3511816ca43c9))
+
 # [@kibisis/chains-v2.3.0](https://github.com/kibis-is/toolkit/compare/@kibisis/chains-v2.2.0...@kibisis/chains-v2.3.0) (2025-08-13)
 
 

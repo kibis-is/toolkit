@@ -1,6 +1,6 @@
 {
   "name": "@kibisis/chains",
-  "version": "2.3.0",
+  "version": "2.4.0",
   "private": false,
   "description": "Configurations and utilities for the AVM chains.",
   "repository": {
