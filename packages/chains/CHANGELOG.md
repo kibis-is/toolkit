@@ -1,3 +1,10 @@
+# [@kibisis/chains-v2.5.1](https://github.com/kibis-is/toolkit/compare/@kibisis/chains-v2.5.0...@kibisis/chains-v2.5.1) (2025-08-15)
+
+
+### Bug Fixes
+
+* **chains:** uses conditional namespace for inferring chain type ([#25](https://github.com/kibis-is/toolkit/issues/25)) ([603dd27](https://github.com/kibis-is/toolkit/commit/603dd27a47ebce40b93bda2e75eeae6a32a97f69))
+
 # [@kibisis/chains-v2.5.0](https://github.com/kibis-is/toolkit/compare/@kibisis/chains-v2.4.0...@kibisis/chains-v2.5.0) (2025-08-15)
 
 
