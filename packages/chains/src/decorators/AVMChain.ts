@@ -15,6 +15,7 @@ import type {
   AVMNodeCollection,
   AVMTransactionParamsResponse,
   Transports,
+  ChainConstructor,
 } from '@/types';
 
 export default class AVMChain extends AbstractChain {
@@ -50,7 +51,9 @@ export default class AVMChain extends AbstractChain {
    * public static methods
    */
 
-  public static async initialize<T extends typeof AVMChain>(this: T): Promise<AVMChain> {
+  public static async initialize(
+    this: ChainConstructor<CAIP002Namespace.Algorand | CAIP002Namespace.AVM>
+  ): Promise<AVMChain> {
     const algod = this._defaultNode(this.transports.algods);
     const baseURL = `${algod.origin}${algod.port ? `:${algod.port}` : ''}`;
     const config: AxiosRequestConfig | undefined = algod.token
