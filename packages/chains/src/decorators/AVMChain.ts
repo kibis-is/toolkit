@@ -23,6 +23,7 @@ export default class AVMChain extends AbstractChain {
    */
 
   public static readonly namespace: CAIP002Namespace.Algorand | CAIP002Namespace.AVM;
+  public static readonly shortName: string;
   public static readonly transports: Transports<CAIP002Namespace.Algorand>;
 
   protected constructor(params: ChainParameters<CAIP002Namespace.Algorand | CAIP002Namespace.AVM>) {
@@ -96,6 +97,10 @@ export default class AVMChain extends AbstractChain {
 
   public namespace(): CAIP002Namespace.Algorand | CAIP002Namespace.AVM {
     return (this.constructor as typeof AVMChain).namespace;
+  }
+
+  public shortName(): string {
+    return (this.constructor as typeof AVMChain).shortName;
   }
 
   public transports(): Transports<CAIP002Namespace.Algorand> {

@@ -21,6 +21,7 @@ export default class EthereumSepolia extends EVMChain {
     name: 'Ether',
     symbol: 'ETH',
   };
+  public static readonly shortName = 'eth';
   public static readonly transports: Transports<CAIP002Namespace.EIP155> = {
     https: {
       default: 0,

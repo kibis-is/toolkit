@@ -21,6 +21,7 @@ export default class VoiTestnet extends AVMChain {
     name: 'Voi',
     symbol: 'VOI',
   };
+  public static readonly shortName = 'voi';
   public static readonly transports: Transports<CAIP002Namespace.AVM> = {
     algods: {
       default: 0,

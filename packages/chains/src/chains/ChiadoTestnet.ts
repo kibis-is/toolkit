@@ -21,6 +21,7 @@ export default class ChiadoTestnet extends EVMChain {
     name: 'Testnet xDai',
     symbol: 'xDAI',
   };
+  public static readonly shortName = 'gno';
   public static readonly transports: Transports<CAIP002Namespace.EIP155> = {
     https: {
       default: 0,
