@@ -4,7 +4,7 @@ import { CAIP002Namespace } from '@/enums';
 // types
 import { AVMNetworkInformation, EVMNetworkInformation } from '@/types';
 
-type NetworkInfomration<Namespace = CAIP002Namespace> = Namespace extends CAIP002Namespace.Algorand
+type NetworkInformation<Namespace = CAIP002Namespace> = Namespace extends CAIP002Namespace.Algorand
   ? AVMNetworkInformation
   : Namespace extends CAIP002Namespace.AVM
     ? AVMNetworkInformation
@@ -12,4 +12,4 @@ type NetworkInfomration<Namespace = CAIP002Namespace> = Namespace extends CAIP00
       ? EVMNetworkInformation
       : never;
 
-export default NetworkInfomration;
+export default NetworkInformation;
