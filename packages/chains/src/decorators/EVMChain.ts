@@ -8,7 +8,7 @@ import { CAIP002Namespace } from '@/enums';
 import AbstractChain from './AbstractChain';
 
 // types
-import type { ChainParameters, RPCPayload, RPCResponse, RPCURLs, Transports } from '@/types';
+import type { ChainConstructor, ChainParameters, RPCPayload, RPCResponse, RPCURLs, Transports } from '@/types';
 
 export default class EVMChain extends AbstractChain {
   /**
@@ -43,7 +43,7 @@ export default class EVMChain extends AbstractChain {
    * public static methods
    */
 
-  public static async initialize<T extends typeof EVMChain>(this: T): Promise<EVMChain> {
+  public static async initialize(this: ChainConstructor<CAIP002Namespace.EIP155>): Promise<EVMChain> {
     const rpcURL = this._defaultRPCURL(this.transports.https);
     const id = uuid();
     const { data } = await axios.post<RPCResponse<string>, AxiosResponse<RPCResponse<string>, RPCPayload>, RPCPayload>(
