@@ -1,3 +1,10 @@
+# [@kibisis/chains-v2.5.0](https://github.com/kibis-is/toolkit/compare/@kibisis/chains-v2.4.0...@kibisis/chains-v2.5.0) (2025-08-15)
+
+
+### Features
+
+* **chains:** adds short name ([#24](https://github.com/kibis-is/toolkit/issues/24)) ([7c5c314](https://github.com/kibis-is/toolkit/commit/7c5c31458b0c13bc424ec8011a91d7f4abc9cdea))
+
 # [@kibisis/chains-v2.4.0](https://github.com/kibis-is/toolkit/compare/@kibisis/chains-v2.3.0...@kibisis/chains-v2.4.0) (2025-08-14)
 
 
