@@ -1,3 +1,10 @@
+# [@kibisis/chains-v2.5.2](https://github.com/kibis-is/toolkit/compare/@kibisis/chains-v2.5.1...@kibisis/chains-v2.5.2) (2025-08-15)
+
+
+### Bug Fixes
+
+* **chains:** adds type flexibility for chain initializers ([#26](https://github.com/kibis-is/toolkit/issues/26)) ([65de85b](https://github.com/kibis-is/toolkit/commit/65de85b33de23002a8deb9cb7ab3ca4c10c256ee))
+
 # [@kibisis/chains-v2.5.1](https://github.com/kibis-is/toolkit/compare/@kibisis/chains-v2.5.0...@kibisis/chains-v2.5.1) (2025-08-15)
 
 
