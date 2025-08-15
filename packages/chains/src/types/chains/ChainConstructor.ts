@@ -1,6 +1,6 @@
 // decorators
-import { AVMChain } from '@/decorators';
+import { AVMChain, EVMChain } from '@/decorators';
 
-type ChainConstructor = typeof AVMChain;
+type ChainConstructor = typeof AVMChain | typeof EVMChain;
 
 export default ChainConstructor;

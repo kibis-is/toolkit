@@ -21,6 +21,7 @@ export default class AlgorandTestnet extends AVMChain {
     name: 'Algo',
     symbol: 'ALGO',
   };
+  public static readonly shortName = 'algo';
   public static readonly transports: Transports<CAIP002Namespace.Algorand> = {
     algods: {
       default: 0,

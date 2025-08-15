@@ -45,6 +45,12 @@ export default abstract class AbstractChain {
    */
   public static readonly namespace: CAIP002Namespace;
   /**
+   * The chain's short name, as per [ERC-3770]{@link https://eips.ethereum.org/EIPS/eip-3770}.
+   * @static
+   * @readonly
+   */
+  public static readonly shortName: string;
+  /**
    * Details relating to the native currency of the chain.
    * @static
    * @readonly
@@ -96,6 +102,15 @@ export default abstract class AbstractChain {
    * @abstract
    */
   public abstract namespace(): CAIP002Namespace;
+
+  /**
+   * Gets the chain's short name, as per [ERC-3770]{@link https://eips.ethereum.org/EIPS/eip-3770}.
+   *
+   * @return {string} The chain's short name, as per [ERC-3770]{@link https://eips.ethereum.org/EIPS/eip-3770}.
+   * @public
+   * @abstract
+   */
+  public abstract shortName(): string;
 
   /**
    * Gets the transport configuration to communicate with the chain for the specified
